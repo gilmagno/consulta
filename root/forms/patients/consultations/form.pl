@@ -7,21 +7,21 @@ use utf8;
 
     elements => [
         {
-            type  => 'Text',
-            name  => 'date',
-            label => 'Data',
+            type        => 'Text',
+            name        => 'date',
+            label       => 'Data',
             constraints => ['Required'],
-            attrs => {
+            attrs       => {
                 class => 'form-control datepicker',
             },
             inflator => {
-                type => 'DateTime',
+                type   => 'DateTime',
                 parser => {
                     strptime => '%d/%m/%Y',
                 },
             },
             deflator => {
-                type => 'Strftime',
+                type     => 'Strftime',
                 strftime => '%d/%m/%Y',
             },
         },
@@ -33,7 +33,7 @@ use utf8;
             constraints => ['Required'],
             attrs       => {
                 class => 'form-control',
-                rows => 9
+                rows  => 9
             },
         },
 

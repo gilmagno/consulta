@@ -1,7 +1,7 @@
 package Consulta::Controller::Patients;
 use Moose;
 use namespace::autoclean;
-
+use utf8;
 use HTML::FormFu;
 
 BEGIN { extends 'Catalyst::Controller' }
@@ -21,6 +21,7 @@ sub object :Chained('base') PathPart('') CaptureArgs(1) {
     };
 
     if ($@ or !$user) {
+        $c->flash->{error_msg} = 'Não foi possível acessar o paciente solicitado.';
         $c->res->redirect( $c->uri_for_action( '/patients/index') );
         $c->detach('index');
     }
@@ -71,6 +72,7 @@ sub create :Chained('base') PathPart('criar') Args(0) {
     if ($form->submitted_and_valid) {
         my $user = $c->model('DB::User')->new_result({});
         $form->model->update( $user );
+        $c->flash->{success_msg} = 'Paciente criado.';
         $c->res->redirect( $c->uri_for_action( '/patients/details', [$user->id] ) );
     }
 
@@ -85,6 +87,7 @@ sub edit :Chained('object') PathPart('editar') Args(0) {
 
     if ($form->submitted_and_valid) {
         $form->model->update( $c->stash->{user} );
+        $c->flash->{success_msg} = 'Paciente editado.';
         $c->res->redirect( $c->uri_for_action( '/patients/details', [$c->stash->{user}->id] ) );
     }
     else {

@@ -18,13 +18,16 @@ requires 'namespace::autoclean';
 requires 'Config::General'; # This should reflect the config file format you've chosen
                  # See Catalyst::Plugin::ConfigLoader for supported formats
 
-requires 'DBIx::Class';
-requires 'Catalyst::Model::DBIC::Schema';
-requires 'DBIx::Class::Schema::Loader';
+requires 'Catalyst::Plugin::StackTrace';
 requires 'Catalyst::View::TT';
 
-#authorization::roleabilites
-#session - cookies
+requires 'DBIx::Class';
+requires 'DBIx::Class::Schema::Loader';
+requires 'Catalyst::Model::DBIC::Schema';
+
+requires 'Catalyst::Plugin::Session';
+requires 'Catalyst::Plugin::Session::Store::FastMmap';
+requires 'Catalyst::Plugin::Session::State::Cookie';
 
 requires 'HTML::FormFu';
 requires 'HTML::FormFu::Model::DBIC';

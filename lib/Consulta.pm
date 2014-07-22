@@ -9,6 +9,10 @@ use Catalyst qw/
     ConfigLoader
     Static::Simple
     StackTrace
+
+    Session
+    Session::Store::FastMmap
+    Session::State::Cookie
 /;
 
 extends 'Catalyst';

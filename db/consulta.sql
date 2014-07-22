@@ -141,7 +141,7 @@ insert into users (name) values ('Carlos Moura');
 insert into clients_users (user_id, client_id) values (3, 1);
 insert into users_roles (user_id, role_id) values (3, 3);
 
-insert into users (name) values ('Gil Magno Silva');
+insert into users (name, rg, cpf, phone, email) values ('Gil Magno Silva', '2001010123123', '002.342.123-43', '(85) 9934-2849', 'gil@gmail.com');
 insert into clients_users (user_id, client_id) values (4, 1);
 insert into users_roles (user_id, role_id) values (4, 5);
 
@@ -156,7 +156,8 @@ insert into users_roles (user_id, role_id) values (6, 5);
 ----------------------------------------------------------------------
 
 insert into consultations (register_id, patient_id, date, text, status) values
-       (3, 4, '2003-02-01', 'Paciente solicitou checagem completa. Solicitei homograma. Auscutei e encontrei estado normal. Chequei pulmões, normal. Chequei pressão e temperatura, normal. Falou que tem tido febre, mas agora está melhor. Não está sob nenhuma medicação no momento.', 'done');
+       (3, 4, '2003-02-01', 'Paciente solicitou checagem completa. Solicitei homograma. Auscutei e encontrei estado normal. Chequei pulmões, normal. Chequei pressão e temperatura, normal.
+Falou que tem tido febre, mas agora está melhor. Não está sob nenhuma medicação no momento.', 'done');
 
 insert into consultations (register_id, patient_id, date, text, status) values
        (3, 4,  '2003-02-15', 'Paciente retornou com o exame solicitado e outros. Indicam normalidade. Paciente afirma estar bem melhor. Aconselhei repouso e que retornasse em duas semanas.', 'done');
