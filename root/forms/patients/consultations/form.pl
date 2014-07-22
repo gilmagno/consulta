@@ -7,17 +7,6 @@ use utf8;
 
     elements => [
         {
-            type        => 'Textarea',
-            name        => 'text',
-            label       => 'Anotações',
-            constraints => ['Required'],
-            attrs       => {
-                class => 'form-control',
-                rows => 9
-            },
-        },
-
-        {
             type  => 'Text',
             name  => 'date',
             label => 'Data',
@@ -36,6 +25,18 @@ use utf8;
                 strftime => '%d/%m/%Y',
             },
         },
+
+        {
+            type        => 'Textarea',
+            name        => 'text',
+            label       => 'Anotações',
+            constraints => ['Required'],
+            attrs       => {
+                class => 'form-control',
+                rows => 9
+            },
+        },
+
         {
             type  => 'Submit',
             value => 'Enviar',
@@ -45,4 +46,3 @@ use utf8;
         },
     ],
 }
-
