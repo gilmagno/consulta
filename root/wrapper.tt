@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="[% c.uri_for('/static/css/bootstrap.min.css') %]">
+    <link rel="stylesheet" href="[% c.uri_for('/static/css/jquery-ui.min.css') %]">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="[% c.uri_for('/static/css/consulta.css') %]">
+
+    <script src="[% c.uri_for('/static/js/jquery.min.js') %]"></script>
+    <script src="[% c.uri_for('/static/js/bootstrap.min.js') %]"></script>
+    <script src="[% c.uri_for('/static/js/jquery-ui.min.js') %]"></script>
+    <script src="[% c.uri_for('/static/js/datepicker-pt-BR.js') %]"></script>
+    <script src="[% c.uri_for('/static/js/Chart.js') %]"></script>
+  </head>
+
+  <body>
+   <div class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse"
+                  data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">OrgMed</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+
+            <li [% IF c.req.action == '/' %]class="active"[% END %]>
+              <a href="/">Início</a></li>
+
+            <li [% IF c.req.action.match('/patients/.*') %]class="active"[% END %]>
+              <a href="/pacientes">Pacientes</a></li>
+
+            <li [% IF c.req.action.match('/appointments/.*') %]class="active"[% END %]>
+              <a href="/agenda">Agenda</a></li>
+
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+
+            <li><a href="#">Sair (Carlos Moura)</a></li>
+
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      [% content %]
+    </div><!-- /.container -->
+  </body>
+</html>

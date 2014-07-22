@@ -1,0 +1,8 @@
+<script type="text/javascript">
+$.datepicker.setDefaults({});
+$.datepicker.setDefaults( $.datepicker.regional[ "pt-BR" ] );
+
+$(document).ready(function() {
+    $('.datepicker').datepicker();
+});
+</script>

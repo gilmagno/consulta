@@ -1,0 +1,138 @@
+<div class="page-header">
+  <h1>[% user.name %]</h1>
+</div>
+
+<a class="btn btn-default" href="[% c.uri_for_action('/patients/index') %]">
+  <span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+
+<a class="btn btn-default" href="[% c.uri_for_action('/patients/edit', [user.id]) %]">
+  <span class="glyphicon glyphicon-pencil"></span> Editar</a>
+
+<a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/create', [user.id]) %]">
+  <span class="glyphicon glyphicon-heart"></span> Nova Consulta</a>
+
+<a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/index', [user.id]) %]">
+  <span class="glyphicon glyphicon-th-list"></span> Histórico de Consultas</a>
+
+<h2>Dados Pessoais</h2>
+
+<dl class="dl-horizontal">
+  <dt>RG</dt>
+  <dd>[% user.rg || 'Não informado' %]</dd>
+  <dt>CPF</dt>
+  <dd>[% user.cpf || 'Não informado' %]</dd>
+  <dt>Endereço</dt>
+  <dd>[% user.address || 'Não informado' %]</dd>
+  <dt>Telefone</dt>
+  <dd>[% user.phone || 'Não informado' %]</dd>
+  <dt>Telefone Adicional</dt>
+  <dd>[% user.phone2 || 'Não informado' %]</dd>
+  <dt>Email</dt>
+  <dd>[% user.email || 'Não informado' %]</dd>
+  <dt>Email Adicional</dt>
+  <dd>[% user.email2 || 'Não informado' %]</dd>
+</dl>
+
+<h2>Consultas Recentes</h2>
+
+<div class="list-group">
+  [% FOREACH consultation IN consultations %]
+  <a href="[% c.uri_for_action('/patients/consultations/details', [user.id, consultation.id]) %]" class="list-group-item">
+    <span class="badge pull-left">[% consultation.date.dmy('/') %]</span><br>
+    [% consultation.text %]
+  </a>
+  [% END %]
+</div>
+
+<p>Ver <a href="[% c.uri_for_action('/patients/consultations/index', [user.id]) %]">histórico completo</a>.</p>
+
+<h2>Hipermetropia</h2>
+<center>
+  <b>
+    <span style="color: rgba(151,187,205,1)">Direito</span><br>
+    <span style="color: rgba(251,187,205,1)">Esquerdo</span><br>
+  </b>
+  <canvas id="myChartHipermetropia" width="320" height="400"></canvas>
+</center>
+
+<script type="text/javascript">
+var data = {
+    labels: ["Jan/2004", "Fev/2005", "Mar/2006", "Abr/2007", "Mai/2008", "Jun/2009", "Dez/2009"],
+    datasets: [
+        {
+            label: "Direito",
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: [0.2, 0.3, 0.7, 1.1, 1.1, 1.5, 1.5]
+        },
+        {
+            label: "Esquerdo",
+            fillColor: "rgba(251,187,205,0.2)",
+            strokeColor: "rgba(251,187,205,1)",
+            pointColor: "rgba(251,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: [0.5, 0.5, 1, 1.2, 1.9, 1.9, 1.9]
+        }
+    ]
+};
+var options = { animation: false }
+var ctx = $("#myChartHipermetropia").get(0).getContext("2d");
+var myLineChart = new Chart(ctx).Line(data, options);
+</script>
+
+<h2>Colesterol</h2>
+<center>
+  <b>
+    <span style="color: rgba(220,220,220,1)">Colesterol Total</span><br>
+    <span style="color: rgba(151,187,205,1)">HDL</span><br>
+    <span style="color: rgba(251,187,205,1)">LDL</span><br>
+  </b>
+  <canvas id="myChart" width="320" height="400"></canvas>
+</center>
+
+<script type="text/javascript">
+var data = {
+    labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul"],
+    datasets: [
+        {
+            label: "Colesterol Total",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: [165, 159, 170, 171, 156, 155, 140]
+        },
+        {
+            label: "HDL",
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: [78, 78, 70, 79, 86, 77, 70]
+        },
+        {
+            label: "LDL",
+            fillColor: "rgba(251,187,205,0.2)",
+            strokeColor: "rgba(251,187,205,1)",
+            pointColor: "rgba(251,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: [68, 68, 60, 89, 67, 57, 60]
+        }
+    ]
+};
+var options = { animation: false }
+var ctx = $("#myChart").get(0).getContext("2d");
+var myLineChart = new Chart(ctx).Line(data, options);
+</script>

@@ -1,0 +1,35 @@
+<div class="page-header">
+  <h1>Pacientes</h1>
+</div>
+
+<a class="btn btn-default" href="[% c.uri_for_action('/patients/create') %]">
+  <span class="glyphicon glyphicon-plus"></span> Novo Paciente</a>
+
+<br><br>
+
+<div class="row">
+  <form role="form">
+    <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-md-offset-3 col-md-6">
+      <div class="input-group">
+        <input type="text" name="q" class="form-control" value="[% q %]">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Buscar</button>
+        </span>
+      </div><!-- /input-group -->
+    </div>
+  </form>
+</div>
+
+<br>
+
+[% IF users.size > 0 %]
+<div class="list-group">
+  [% FOREACH user IN users %]
+  <a href="[% c.uri_for_action('/patients/details', [user.id]) %]" class="list-group-item">
+    [% user.name %]<br>
+    <small>[% IF user.rg; 'RG: ' _ user.rg; ELSE; 'RG não informado'; END %] &mdash; [% IF user.cpf; 'CPF: ' _ user.cpf; ELSE; 'CPF não informado'; END %]</small></a>
+  [% END %]
+</div>
+[% ELSE %]
+<div><i>Nenhum usuário encontrado.</i></div>
+[% END %]

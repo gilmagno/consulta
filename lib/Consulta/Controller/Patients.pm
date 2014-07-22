@@ -1,0 +1,101 @@
+package Consulta::Controller::Patients;
+use Moose;
+use namespace::autoclean;
+
+use HTML::FormFu;
+
+BEGIN { extends 'Catalyst::Controller' }
+
+sub base :Chained('/') PathPart('pacientes') CaptureArgs(0) {
+    my ($self, $c) = @_;
+
+    $c->stash(users_rs => $c->model('DB::User'));
+}
+
+sub object :Chained('base') PathPart('') CaptureArgs(1) {
+    my ($self, $c, $user_id) = @_;
+
+    my $user;
+    eval {
+        $user = $c->stash->{users_rs}->find($user_id);
+    };
+
+    if ($@ or !$user) {
+        $c->res->redirect( $c->uri_for_action( '/patients/index') );
+        $c->detach('index');
+    }
+
+    $c->stash(user => $user);
+}
+
+sub index :Chained('base') PathPart('') Args(0) {
+    my ($self, $c) = @_;
+
+    my $where;
+    my $q;
+    my $page ||= 1;
+
+    if ($c->req->param('q')) {
+        $q = $c->req->param('q');
+
+        # TODO Tratar segurança
+        $q =~ s/(<|>)//g; # Tira tags
+
+        $where = { 'me.name' => { ilike => '%' . $q . '%' } };
+    }
+
+    if ($c->req->param('pg')) {
+        $page = $c->req->param('pg');
+    }
+
+    my ($users, $pager) = $c->stash->{users_rs}->get_patients_paginated($page, $where);
+
+    $c->stash(users => $users,
+              pager => $pager,
+              q     => $q);
+}
+
+sub details :Chained('object') PathPart('') Args(0) {
+    my ($self, $c) = @_;
+
+    $c->stash(consultations => [$c->stash->{user}->consultations_patients(undef, { rows => 5,
+                                                                                   order_by => { -desc => 'date' } } )]);
+}
+
+sub create :Chained('base') PathPart('criar') Args(0) {
+    my ($self, $c) = @_;
+
+    my $form = HTML::FormFu->new({ load_config_file => 'root/forms/patients/form.pl' });
+    $form->process($c->req->params);
+
+    if ($form->submitted_and_valid) {
+        my $user = $c->model('DB::User')->new_result({});
+        $form->model->update( $user );
+        $c->res->redirect( $c->uri_for_action( '/patients/details', [$user->id] ) );
+    }
+
+    $c->stash(form => $form);
+}
+
+sub edit :Chained('object') PathPart('editar') Args(0) {
+    my ($self, $c) = @_;
+
+    my $form = HTML::FormFu->new({ load_config_file => 'root/forms/patients/form.pl' });
+    $form->process($c->req->params);
+
+    if ($form->submitted_and_valid) {
+        $form->model->update( $c->stash->{user} );
+        $c->res->redirect( $c->uri_for_action( '/patients/details', [$c->stash->{user}->id] ) );
+    }
+    else {
+        $form->model->default_values( $c->stash->{user} );
+    }
+
+    $c->stash(form => $form);
+}
+
+sub delete :Chained('object') PathPart('deletar') Args(0) {}
+
+__PACKAGE__->meta->make_immutable;
+
+1;

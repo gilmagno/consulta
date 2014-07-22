@@ -1,0 +1,248 @@
+
+* Análise
+:LOGBOOK:
+CLOCK: [2014-07-16 Wed 15:25]--[2014-07-16 Wed 16:50] =>  1:25
+CLOCK: [2014-07-16 Wed 12:05]--[2014-07-16 Wed 13:20] =>  1:15
+CLOCK: [2014-07-10 Thu 14:25]--[2014-07-10 Thu 15:14] =>  0:49
+CLOCK: [2014-06-23 Mon 15:40]--[2014-06-23 Mon 16:19] =>  0:39
+:END:
+:PROPERTIES:
+:Effort:   32:00
+:END:
+
+Sistema modular. Como trabalhar com Catalyst de forma modularizada?
+Exemplo: cadastro de pacientes é único, mas dependendo dos módulos
+instalados um paciente pode ganhar mais "campos" na interface.
+
+Usuário logado só tem acesso a dados do cliente ("clínica") a qual está
+ligado. Como fazer? Descrever aqui antes de começar a implementar.
+
+** Recursos (superficialmente)
+- Cadastro de pacientes
+
+- Agendamento de consultas
+
+- Avisos ao paciente por email e SMS, sobre seus agendamentos e outros
+
+- Insercao de consulta no perfil de um paciente
+
+- Disponibilizacao, para o paciente, de seu historico medico na Internet
+
+- Venda e controle de produtos (?)
+
+- Cobrança, boletos, recibos (agora nao)
+
+- Servidor local que fala com servidor remoto (agora nao)
+
+** Uso
+O super_admin cria um client e cria um admin para este
+client. O admin cria users, mas só para o client em que
+está.
+
+Os usuários doctor e secretary, criados pelo admin, logam e usam o
+sistema.
+
+Usuários secretary cadastram usuários patient e marcam appointments.
+
+Usuários doctor fazem o que secretary faz e também criam
+consultations e arquivos a uma consultation.
+
+** Secretary procura patient
+*** Implementação "versão simples"
+Secretaries e doctors só vê patients que tem seu mesmo client. Não há
+exceções.
+
+Caso um doctor queira ver exames de patient feitos por outro doctor,
+terá que entrar em contato com a administração do sistema. A
+administração entrará em contato com o patient para requisitar
+autorização.
+
+*** Considerar
+Pacient chega numa clínica (client). Secretary entra no sistema e vai
+procurá-lo.
+
+_ Se patient não existe, secretary não encontra e vai ter que cadastrá-lo.
+
+Se o patient existe e está ligado a esta clínica, secretary vai
+encontrá-lo.
+
+Mas se paciente existe e NÃO está ligado a esta clínica?
+
+**** Opção 1
+Secretary encontra qualquer patient, mas só pode ver seu nome e
+documentos (RG e CPF). Não pode ver detalhes como histórico de
+consultas, detalhes de uma consulta ou seus anexos. Pode marcar
+appointment para este patient.
+
+Não encontra
+
+  Secretary não o encontra na busca. Secretary não vai nem saber que
+  ele já tem cadastro. Vai ter que cadastrá-lo de novo. Ele vai ficar
+  com cadastro duplicado, cada cadastro ligado a clients diferentes.
+
+  Prós: secretaries não podem ver patients de outras clínicas.
+  Cons: cadastros duplicados.
+
+Encontra 1
+
+  Secretary encontra o patient e pode utilizar seu cadastro
+  normalmente. É como se não existisse (ou não existirá mesmo) ligado
+  entre patient e client.
+
+  Cons: privacidade muito ruim. Qualquer secretary poderá ver qualquer
+  patient.
+
+Encontra 2
+
+  Secretary encontra o patient, mas só pode acessar seu nome e
+  documentos, por exemplo.  Se quiser utilizar seu cadastro
+  normalmente, o patient terá que fornecer sua senha. Essa senha o
+  patient vai ter recebido quando fez seu cadastro pela primeira vez.
+
+** doctors vêem patients de outros clients? Se sim, como?
+Dúvida: client1 (clínica1) tem user1 (médico) e user2
+(paciente). ¿Pode acontecer de no client2 (clínica2) o user4 (médico)
+estar consultando o mesmo user2 (paciente) e queira ver seu histórico
+médico produzido no client1? Acho que sim. Relevância? Como resolver?
+
+** Navegacao
+Similar ao ACS.
+
+** Como fazer as telas de CRUD de consulta?
+Usuário logado no sistema vê lista de pacientes. Na tela de lista ele
+vê botão de cadastrar novo paciente. Procura um paciente. Clica.
+Entra no contexto do paciente. Menu superior tem itens como
+"histórico, consultas, vendas/produtos" outros. Menu superior fica
+fácil fazer interface resposiva, podemos dizer para os clientes que
+eles podem acessar de celular.
+
+Consultório: paciente chega e talvez secretary já cadstrou. Se não,
+médico pode cadastrar.  Quando cadastrado, médico entra no contexto do
+paciente. Lá terá botão "nova consulta".
+
+** Agendamento de consultas
+
+*** /agenda : agenda completa, para quem tem acesso
+
+*** novo registro de agenda /pacientes/34/marcar-consulta
+Entrar no contexto do paciente. Lá tem botão "marcar consulta".
+Escolhe-se médico, data início. Não tem data-fim.
+
+schedule_items:
+  id, client_id, register_id, patient_id, doctor_id, start
+
+*** Visualização
+
+Tabela com um <tr> por hora. Se houver um ou mais registros numa hora
+X, esses registros aparecerem dentro desse <tr>. Se houver uma hora Y
+para a qual não há registros, o <tr> aparece vazio.
+
+Assim como no org-mode, pode-se ver agenda por dia, semana, mês ou
+ano.
+
+Agenda                                               [+ Nova marcação]
+
+----------------------------------------------------------------------
+08:30 Pedro Carvalho
+----------------------------------------------------------------------
+09:30 José Oliveira
+----------------------------------------------------------------------
+10:00
+----------------------------------------------------------------------
+12:30 Carlos Prata
+----------------------------------------------------------------------
+13:00
+----------------------------------------------------------------------
+14:30 Natália Pinheiro
+----------------------------------------------------------------------
+15:40 Ranier Alves
+----------------------------------------------------------------------
+16:00
+----------------------------------------------------------------------
+
+** ?
+Lembrar que Carlin falou de um tipo almoxarifado (com funcionalidade
+de vendas e trocas) integrado ao sistema.
+** Nomes
+*** Consulta
+Facil de falar
+*** MedData
+Nao tem ingles
+
+** Permissões: procura de usuário
+Médico vê na procura pacientes que são seus 'amigos'.
+
+** Permissões: detalhes de usuários
+Médico pode ver detalhes de pacientes que estão numa clínica que o médico.
+
+** Permissões: consultas de usuário
+
+** Atalho agendamento
+Num agendamento vai ter um botão "Consultar". Será só um atalho para
+ir para /consulta/novo com os dados do usuário lá.
+
+* Administrativo
+** Pesquisa outros softwares
+CLOCK: [2014-07-10 Thu 14:25]--[2014-07-10 Thu 14:46] =>  0:21
+
+*** http://www.doctormax.com.br/
+Desktop
+Multi-modular
+Windows
+
+*** http://www.medsystemweb.com.br
+Desktop
+Multi-modular
+Windows
+
+*** http://www.oftalmosalus.com
+Desktop
+Oftalmológico
+Windows
+
+*** http://iclin.com.br
+Web
+Interface não é boa
+
+*** http://www.medware.com.br
+Desktop
+Windows
+
+*** http://www.softwaresalus.com
+Desktop
+Windows
+
+** Clínicas médicas em Fortaleza
+
+http://www.telelistas.net/ce/fortaleza/clinicas+medicas
+300 clínicas
+
+http://www.guiamais.com.br/busca/clinicas+medicas-fortaleza-ce
+200 clínicas
+
+* Software
+CLOCK: [2014-07-21 Mon 14:40]--[2014-07-21 Mon 14:54] =>  0:14
+CLOCK: [2014-07-18 Fri 21:25]--[2014-07-19 Sat 01:15] =>  3:50
+CLOCK: [2014-07-12 Sat 09:30]--[2014-07-12 Sat 09:45] =>  0:15
+** Base
+** Navegacao
+/
+/entrar
+/sair
+
+/pacientes # Lista de pacientes
+/pacientes/2 # Detalhes de um paciente
+/pacientes/2/
+
+/adm/clientes (depois fazer isso)
+** Banco
+** Autenticacao
+** Autorizacao
+** Cadastro de cliente
+** Agendamento
+*** Web
+*** Avisos por email
+*** Avisos por SMS
+** Consulta
+** Design
+** [#C] Acesso do paciente a seus dados
