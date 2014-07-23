@@ -29,12 +29,6 @@ __PACKAGE__->add_columns(
   { data_type => "date", is_nullable => 1 },
   "text",
   { data_type => "text", is_nullable => 1 },
-  "status",
-  {
-    data_type   => "text",
-    is_nullable => 1,
-    original    => { data_type => "varchar" },
-  },
   "created",
   { data_type => "timestamp with time zone", is_nullable => 1 },
   "updated",
@@ -71,8 +65,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07035 @ 2014-07-22 08:41:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VYWZ9oP/AYvU6RSDYt1xhQ
+# Created by DBIx::Class::Schema::Loader v0.07035 @ 2014-07-22 16:18:31
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:wkJlCXwYKD5W22wkP9TPog
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

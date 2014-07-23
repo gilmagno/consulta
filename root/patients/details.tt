@@ -5,14 +5,19 @@
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/index') %]">
   <span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
+[% IF c.check_user_ability('users_edit') %]
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/edit', [user.id]) %]">
   <span class="glyphicon glyphicon-pencil"></span> Editar</a>
+[% END %]
+
+<a class="btn btn-default" href="[% c.uri_for_action('/patients/password', [user.id]) %]">
+  <span class="glyphicon glyphicon-lock"></span> Login e Senha</a>
 
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/create', [user.id]) %]">
   <span class="glyphicon glyphicon-heart"></span> Nova Consulta</a>
 
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/index', [user.id]) %]">
-  <span class="glyphicon glyphicon-th-list"></span> Histórico de Consultas</a>
+  <span class="glyphicon glyphicon-th-list"></span> Consultas</a>
 
 <h2>Dados Pessoais</h2>
 
@@ -31,6 +36,8 @@
   <dd>[% user.email || 'Não informado' %]</dd>
   <dt>Email Adicional</dt>
   <dd>[% user.email2 || 'Não informado' %]</dd>
+  <dt>Login</dt>
+  <dd>[% user.username || 'Não informado' %]</dd>
 </dl>
 
 <h2>Consultas Recentes</h2>
@@ -44,7 +51,8 @@
   [% END %]
 </div>
 
-<p>Ver <a href="[% c.uri_for_action('/patients/consultations/index', [user.id]) %]">histórico completo</a>.</p>
+<p>Ver <a href="[% c.uri_for_action('/patients/consultations/index', [user.id]) %]">
+    histórico completo</a>.</p>
 
 <h2>Hipermetropia</h2>
 <center>

@@ -27,6 +27,18 @@ sub object :Chained('base') PathPart('') CaptureArgs(1) {
     }
 
     $c->stash(user => $user);
+
+
+    if ($c->check_any_user_role('Super Admin', 'Admin', 'Médico')) {}
+    elsif ($c->check_user_roles('Paciente')) {
+        if ($c->user->id == $user->id) {}
+        else {
+            $c->flash->{error_msg} = 'Autorizada não concedida.';
+            $c->res->redirect($c->uri_for_action('/patients/details', [$c->user->id]));
+            return 0;
+        }
+    }
+
 }
 
 sub index :Chained('base') PathPart('') Args(0) {
@@ -59,6 +71,8 @@ sub index :Chained('base') PathPart('') Args(0) {
 sub details :Chained('object') PathPart('') Args(0) {
     my ($self, $c) = @_;
 
+    $c->log->debug('users_edit: ' .  $c->check_user_ability('users_edit') );
+
     $c->stash(consultations => [$c->stash->{user}->consultations_patients(undef, { rows => 5,
                                                                                    order_by => { -desc => 'date' } } )]);
 }
@@ -82,6 +96,13 @@ sub create :Chained('base') PathPart('criar') Args(0) {
 sub edit :Chained('object') PathPart('editar') Args(0) {
     my ($self, $c) = @_;
 
+    unless ( $c->check_user_ability('users_edit') ) {
+        $c->stash->{error_msg} = 'Não autorizado/a.';
+        $c->go('/index');
+    }
+
+    $c->log->debug('--- edit()');
+
     my $form = HTML::FormFu->new({ load_config_file => 'root/forms/patients/form.pl' });
     $form->process($c->req->params);
 
@@ -99,6 +120,24 @@ sub edit :Chained('object') PathPart('editar') Args(0) {
 
 sub delete :Chained('object') PathPart('deletar') Args(0) {}
 
+sub password :Chained('object') PathPart('senha') Args(0) {
+    my ($self, $c) = @_;
+
+    my $form = HTML::FormFu->new({ load_config_file => 'root/forms/patients/password.pl' });
+    $form->process($c->req->params);
+
+    if ($form->submitted_and_valid) {
+        $form->model->update( $c->stash->{user} );
+        $c->flash->{success_msg} = 'Paciente editado.';
+        $c->res->redirect( $c->uri_for_action( '/patients/details', [$c->stash->{user}->id] ) );
+    }
+    else {
+        $form->model->default_values( $c->stash->{user} );
+    }
+
+
+    $c->stash(form => $form);
+}
 __PACKAGE__->meta->make_immutable;
 
 1;

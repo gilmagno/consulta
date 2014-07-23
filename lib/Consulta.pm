@@ -10,6 +10,9 @@ use Catalyst qw/
     Static::Simple
     StackTrace
 
+    Authentication
+    Authorization::RoleAbilities
+
     Session
     Session::Store::FastMmap
     Session::State::Cookie
@@ -37,7 +40,23 @@ __PACKAGE__->config(
     enable_catalyst_header => 1, # Send X-Catalyst header
 
     encoding => 'UTF-8',
-    default_model => 'DB'
+    default_model => 'DB',
+    'Plugin::Authentication' => {
+        default_realm => 'members',
+        members => {
+            credential => {
+                class => 'Password',
+                password_field => 'password',
+                password_type => 'clear'
+               },
+            store => {
+                class => 'DBIx::Class',
+                user_model => 'DB::User',
+                role_relation => 'roles',
+                role_field => 'name'
+            },
+        },
+    },
 );
 
 # Start the application

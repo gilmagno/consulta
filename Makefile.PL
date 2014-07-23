@@ -32,6 +32,9 @@ requires 'Catalyst::Plugin::Session::State::Cookie';
 requires 'HTML::FormFu';
 requires 'HTML::FormFu::Model::DBIC';
 
+requires 'Catalyst::Plugin::Authentication';
+requires 'Catalyst::Plugin::Authorization::RoleAbilities';
+
 test_requires 'Test::More' => '0.88';
 catalyst;
 

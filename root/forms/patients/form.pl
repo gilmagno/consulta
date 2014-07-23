@@ -100,24 +100,6 @@ use utf8;
         },
 
         {
-            type  => 'Text',
-            name  => 'username',
-            label => 'Login',
-            attrs => {
-                class => 'form-control',
-            },
-        },
-
-        {
-            type  => 'Password',
-            name  => 'password',
-            label => 'Senha',
-            attrs => {
-                class => 'form-control',
-            },
-        },
-
-        {
             type  => 'Submit',
             value => 'Enviar',
             attrs => {
@@ -126,4 +108,3 @@ use utf8;
         },
     ],
 }
-

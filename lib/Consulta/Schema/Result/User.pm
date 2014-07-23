@@ -126,24 +126,6 @@ __PACKAGE__->belongs_to(
   },
 );
 __PACKAGE__->has_many(
-  "appointments_doctors",
-  "Consulta::Schema::Result::Appointment",
-  { "foreign.doctor_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
-);
-__PACKAGE__->has_many(
-  "appointments_patients",
-  "Consulta::Schema::Result::Appointment",
-  { "foreign.patient_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
-);
-__PACKAGE__->has_many(
-  "appointments_registers",
-  "Consulta::Schema::Result::Appointment",
-  { "foreign.register_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
-);
-__PACKAGE__->has_many(
   "consultations_patients",
   "Consulta::Schema::Result::Consultation",
   { "foreign.patient_id" => "self.id" },
@@ -164,8 +146,8 @@ __PACKAGE__->has_many(
 __PACKAGE__->many_to_many("roles", "users_roles", "role");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07035 @ 2014-07-21 14:51:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:V2rKiu5IZ1VA3Go0bB/xPA
+# Created by DBIx::Class::Schema::Loader v0.07035 @ 2014-07-22 16:18:31
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:celYdf5Vp1mHEmd7wmW6Cw
 
 sub address {
     my $self = shift;
@@ -196,6 +178,22 @@ sub address {
     }
 
     return $address;
+}
+
+sub has_role {
+    my ($self, $role) = @_;
+
+    my @roles = $self->roles;
+
+    return 1 if grep { $_ eq $role } @roles;
+}
+
+sub has_action {
+    my ($self, $action) = @_;
+
+    my @actions = $self->actions;
+
+    return 1 if grep { $_ eq $action } @actions;
 }
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
