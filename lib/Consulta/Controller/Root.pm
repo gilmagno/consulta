@@ -8,58 +8,34 @@ BEGIN { extends 'Catalyst::Controller' }
 # so they function identically to actions created in MyApp.pm
 __PACKAGE__->config(namespace => '');
 
-=for
-
 sub auto :Private {
     my ($self, $c) = @_;
 
-    if ($c->action eq $c->controller('Root')->action_for('login') ||
-          $c->action eq $c->controller('Root')->action_for('logout')) {
+    if ( $c->action eq $c->controller('Root')->action_for('login') ||
+         $c->action eq $c->controller('Root')->action_for('logout')   ) {
         return 1;
     }
-    elsif ($c->user_exists) {
-        if ($c->check_user_roles('Super Admin')) {
-        }
-        elsif ($c->check_user_roles('Admin')) {
-        }
-        elsif ($c->check_user_roles('Médico')) {
-        }
-        elsif ($c->check_user_roles('Paciente')) {
-            $c->log->debug($c->action);
-            if ($c->action =~ /^patients\// && $c->req->captures->[0] == $c->user->id) {
-                $c->log->debug( $c->req->captures->[0] );
-                $c->log->debug( $c->user->id );
-                return 1;
-            }
-            else {
-                $c->res->redirect($c->uri_for_action('/patients/details', [$c->user->id]));
-                return 0;
-            }
-
-            #$c->log->debug(Dumper $c->req->captures);
-            #$c->res->redirect($c->uri_for_action('/patients/details', [$c->user->id]));
-            #return 1;
-        }
-
-        return 1;
+    elsif (!$c->user_exists) {
+        $c->res->redirect($c->uri_for_action('/login'));
+        return 0;
     }
 
-    $c->res->redirect('/entrar');
-    return 0;
+    return 1;
 }
-
-=cut
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
     $c->log->debug(' Root::index ');
 }
 
-=for
-
 sub login :Path('/entrar') Args(0) {
     my ( $self, $c ) = @_;
 
+    #for (1..100_000_000_000) {
+    #    $c->log->debug( 30*$_ );
+    #}
+
+    $c->log->debug('login action being run');
     if ($c->req->method eq 'POST') {
         my $credentials = { username => $c->req->param('username'),
                             password => $c->req->param('password') };
@@ -73,13 +49,11 @@ sub login :Path('/entrar') Args(0) {
     }
 }
 
-sub logout :Path('/sair') Args(0) {
+sub logout :Path('sair') Args(0) {
     my ( $self, $c ) = @_;
     $c->logout;
     $c->res->redirect('/');
 }
-
-=cut
 
 =head2 default
 
