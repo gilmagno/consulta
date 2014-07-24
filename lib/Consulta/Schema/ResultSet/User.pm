@@ -47,7 +47,7 @@ sub _get_users_from_role_paginated {
 
     $where->{'role.name'} = $role;
 
-    my $attrs = { join     => { users_roles => role      },
+    my $attrs = { join     => { user_roles => role      },
                   order_by => { -asc        => 'me.name' },
                   page     => $page };
 

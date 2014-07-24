@@ -43,6 +43,8 @@ sub details :Chained('object') PathPart('') Args(0) {}
 sub create :Chained('base') PathPart('criar') Args(0) {
     my ($self, $c) = @_;
 
+    $c->detach('/unauthorized') unless $c->check_user_ability('consultations_create');
+
     my $form = HTML::FormFu->new({ load_config_file => 'root/forms/patients/consultations/form.pl' });
     $form->process($c->req->params);
 

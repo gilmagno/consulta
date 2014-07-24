@@ -36,6 +36,8 @@ requires 'Catalyst::Plugin::Authentication';
 requires 'Catalyst::Plugin::Authorization::RoleAbilities';
 
 test_requires 'Test::More' => '0.88';
+test_requires 'Test::WWW::Mechanize::Catalyst';
+
 catalyst;
 
 install_script glob('script/*.pl');

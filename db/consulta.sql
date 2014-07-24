@@ -71,16 +71,16 @@ create table actions (
        name varchar
 );
 
-create table users_roles (
+create table user_roles (
        user_id int references users,
        role_id int references roles,
        primary key (user_id, role_id)
 );
 
 create table role_actions (
-       id serial primary key,
-       role_id int,
-       action_id int
+       role_id int references roles,
+       action_id int references actions,
+       primary key (role_id, action_id)
 );
 
 ----------------------------------------------------------------------
@@ -219,27 +219,27 @@ insert into role_actions (role_id, action_id) values (5, 7); -- consultations_vi
 ----------------------------------------------------------------------
 
 insert into users (name) values ('Super Admin');
-insert into users_roles (user_id, role_id) values (1, 1);
+insert into user_roles (user_id, role_id) values (1, 1);
 
 insert into users (name) values ('Admin');
 insert into clients_users (user_id, client_id) values (2, 1);
-insert into users_roles (user_id, role_id) values (2, 2);
+insert into user_roles (user_id, role_id) values (2, 2);
 
 insert into users (name, username, password) values ('Carlos Moura', 'carlosmoura', 'senha');
 insert into clients_users (user_id, client_id) values (3, 1);
-insert into users_roles (user_id, role_id) values (3, 3);
+insert into user_roles (user_id, role_id) values (3, 3);
 
-insert into users (name, username, password, rg, cpf, phone, email) values ('Gil Magno Silva', 'gilmagno', 'senha', '2001010123123', '002.342.123-43', '(85) 9934-2849', 'gil@gmail.com');
+insert into users (name, username, password, rg, cpf, phone, email) values ('Gil Magno Silva', 'gilmagno', 'senha', '2001010123123', '002.342.123-43', '(85) 9934-2849', 'gilmagno@gmail.com');
 insert into clients_users (user_id, client_id) values (4, 1);
-insert into users_roles (user_id, role_id) values (4, 5);
+insert into user_roles (user_id, role_id) values (4, 5);
 
 insert into users (name) values ('Carlos Eça Figueiras');
 insert into clients_users (user_id, client_id) values (5, 1);
-insert into users_roles (user_id, role_id) values (5, 5);
+insert into user_roles (user_id, role_id) values (5, 5);
 
 insert into users (name) values ('Renato Germano Silva');
 insert into clients_users (user_id, client_id) values (6, 1);
-insert into users_roles (user_id, role_id) values (6, 5);
+insert into user_roles (user_id, role_id) values (6, 5);
 
 ----------------------------------------------------------------------
 
@@ -252,3 +252,11 @@ insert into consultations (register_id, patient_id, date, text) values
 
 insert into consultations (register_id, patient_id, date, text) values
 (3, 4, '2003-02-27', 'Paciente afirma não estar sentido mais nenhum incômodo físico.');
+
+
+insert into consultations (register_id, patient_id, date, text) values
+(3, 4, '2003-03-27', 'Checagem geral. Solicitei vários exames.');
+
+
+insert into consultations (register_id, patient_id, date, text) values
+(3, 4, '2003-04-27', 'Retorno.');

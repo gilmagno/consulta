@@ -27,7 +27,7 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "patient_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-  "date",
+  "date_time",
   { data_type => "timestamp with time zone", is_nullable => 1 },
   "text",
   { data_type => "text", is_nullable => 1 },
@@ -78,8 +78,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07035 @ 2014-07-21 14:51:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:jvUmxljvmzexhE821RoStA
+# Created by DBIx::Class::Schema::Loader v0.07035 @ 2014-07-23 12:51:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YRGdvA+mKKnHZm2xb16LRQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

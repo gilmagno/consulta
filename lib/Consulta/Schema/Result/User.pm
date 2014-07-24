@@ -126,6 +126,24 @@ __PACKAGE__->belongs_to(
   },
 );
 __PACKAGE__->has_many(
+  "appointments_doctors",
+  "Consulta::Schema::Result::Appointment",
+  { "foreign.doctor_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+__PACKAGE__->has_many(
+  "appointments_patients",
+  "Consulta::Schema::Result::Appointment",
+  { "foreign.patient_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+__PACKAGE__->has_many(
+  "appointments_registers",
+  "Consulta::Schema::Result::Appointment",
+  { "foreign.register_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+__PACKAGE__->has_many(
   "consultations_patients",
   "Consulta::Schema::Result::Consultation",
   { "foreign.patient_id" => "self.id" },
@@ -138,16 +156,16 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 __PACKAGE__->has_many(
-  "users_roles",
-  "Consulta::Schema::Result::UsersRole",
+  "user_roles",
+  "Consulta::Schema::Result::UserRole",
   { "foreign.user_id" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
-__PACKAGE__->many_to_many("roles", "users_roles", "role");
+__PACKAGE__->many_to_many("roles", "user_roles", "role");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07035 @ 2014-07-22 16:18:31
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:celYdf5Vp1mHEmd7wmW6Cw
+# Created by DBIx::Class::Schema::Loader v0.07035 @ 2014-07-23 13:49:11
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ktj5Wl9AF+UX0rwNnWQL1w
 
 sub address {
     my $self = shift;

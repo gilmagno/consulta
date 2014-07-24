@@ -30,16 +30,23 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->has_many(
-  "users_roles",
-  "Consulta::Schema::Result::UsersRole",
+  "role_actions",
+  "Consulta::Schema::Result::RoleAction",
   { "foreign.role_id" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
-__PACKAGE__->many_to_many("users", "users_roles", "user");
+__PACKAGE__->has_many(
+  "user_roles",
+  "Consulta::Schema::Result::UserRole",
+  { "foreign.role_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+__PACKAGE__->many_to_many("actions", "role_actions", "action");
+__PACKAGE__->many_to_many("users", "user_roles", "user");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07035 @ 2014-07-21 14:51:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ui+WGZNhQmHRu+Rt8VEUwg
+# Created by DBIx::Class::Schema::Loader v0.07035 @ 2014-07-23 13:49:11
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:UrMWsSGrgUVrP6hEyK9H8w
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

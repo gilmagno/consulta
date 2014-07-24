@@ -2,8 +2,6 @@ package Consulta::Controller::Appointments;
 use Moose;
 use namespace::autoclean;
 
-use HTML::FormFu;
-
 BEGIN { extends 'Catalyst::Controller' }
 
 sub base :Chained('/') PathPart('agenda') CaptureArgs(0) {

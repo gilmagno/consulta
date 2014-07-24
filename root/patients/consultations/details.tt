@@ -5,8 +5,10 @@
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/index', [user.id]) %]">
   <span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
+[% IF c.check_user_ability('consultations_edit') %]
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/edit', [user.id, consultation.id]) %]">
   <span class="glyphicon glyphicon-pencil"></span> Editar</a>
+[% END %]
 
 <h2>Dados</h2>
 
