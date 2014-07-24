@@ -5,42 +5,38 @@
 <a class="btn btn-default" href="[% c.uri_for_action('/appointments/create') %]">
   <span class="glyphicon glyphicon-plus"></span> Novo Agendamento</a>
 
+<a class="btn btn-default" href="[% c.uri_for_action('/appointments/index') %]">
+  <span class="glyphicon glyphicon-calendar"></span> Mês Corrente</a>
+
 <br><br>
 
-[% FOREACH appointment IN appointments %]
-<a href="#" class="list-group-item">[% appointment.date_time.strftime('%Y-%m-%d %H:%M') %]
-  &mdash; [% appointment.patient.name %]
-  <span class="label
-               [% IF appointment.status    == 'Pendente'  %]label-danger
-               [% ELSIF appointment.status == 'Concluído' %]label-success[% END %]
-               pull-right">[% appointment.status %]</span>
-</a>
+<h2>
+  <a href="[% c.uri_for_action('/appointments/index', { f => year_month_before }) %]">←</a>
+  Mês: [% month %]/[% year %]
+  <a href="[% c.uri_for_action('/appointments/index', { f => year_month_after  }) %]">→</a>
+</h2>
+
+[% FOREACH day IN days %]
+
+<h3>[% day.dmy('/') %] [% day.set_locale('pt_BR').day_name.ucfirst %]</h3>
+
+<div class="list-group">
+  [% formatted_day = day.ymd('-') %]
+
+  [% FOREACH appointment IN appointments.$formatted_day %]
+  <a href="[% c.uri_for_action('/appointments/details', [appointment.id]) %]" class="list-group-item">
+    [% appointment.date_time.strftime('%H:%M') %]
+    &mdash;
+    [% appointment.patient.name %]
+    &mdash;
+    [% appointment.doctor.name %]
+
+    <span class="label
+                 [% IF appointment.status    == 'Pendente'  %]label-danger
+                 [% ELSIF appointment.status == 'Concluído' %]label-success[% END %]
+                 pull-right">[% appointment.status %]</span>
+  </a>
+  [% END %]
+</div>
+
 [% END %]
-
-<!--
-<h2>02/04/2004</h2>
-
-<div class="list-group">
-  <a href="#" class="list-group-item">14:30 &mdash; Roger Nóbrega
-    <span class="label label-success pull-right">Concluído</span></a>
-
-  <a href="#" class="list-group-item">15:30 &mdash; Norberto Bóbio
-    <span class="label label-success pull-right">Concluído</span></a>
-
-  <a href="#" class="list-group-item">17:00 &mdash; Borges Carvalho
-    <span class="label label-success pull-right">Concluído</span></a>
-</div>
-
-<h2>03/04/2004</h2>
-
-<div class="list-group">
-  <a href="#" class="list-group-item">14:30 &mdash; Roger Nóbrega
-    <span class="label label-success pull-right">Concluído</span></a>
-
-  <a href="#" class="list-group-item">15:30 &mdash; Norberto Bóbio
-    <span class="label label-success pull-right">Concluído</span></a>
-
-  <a href="#" class="list-group-item">17:00 &mdash; Borges Carvalho
-    <span class="label label-danger pull-right">Pendente</span></a>
-</div>
--->

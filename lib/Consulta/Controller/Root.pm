@@ -4,6 +4,7 @@ use namespace::autoclean;
 use utf8;
 use HTML::FormFu;
 use Data::Dumper;
+use DateTime;
 
 BEGIN { extends 'Catalyst::Controller' }
 
@@ -23,10 +24,9 @@ sub auto :Private {
     }
 
     #$c->log->debug( $c->uri_for_action('/patients/details', [3]) );
-
-    #$c->log->debug('Path: ' . $c->req->path );
-    #$c->log->debug('Action: ' . $c->req->action );
-    #$c->log->debug('Captures: ' . (Dumper $c->req->captures) );
+    #$c->log->debug( 'Path: ' . $c->req->path );
+    #$c->log->debug( 'Action: ' . $c->req->action );
+    #$c->log->debug( 'Captures: ' . (Dumper $c->req->captures) );
 
     return 1;
 }
