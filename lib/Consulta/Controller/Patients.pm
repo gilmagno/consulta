@@ -21,7 +21,7 @@ sub object :Chained('base') PathPart('') CaptureArgs(1) {
 
     if ($@ or !$user) {
         $c->flash->{error_msg} = 'Não foi possível acessar o paciente solicitado.';
-        $c->res->redirect( $c->uri_for_action( '/patients/index') );
+        $c->res->redirect( $c->uri_for_action('/patients/index') );
         $c->detach('index');
     }
 

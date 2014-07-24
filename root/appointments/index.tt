@@ -2,6 +2,22 @@
   <h1>Agenda</h1>
 </div>
 
+<a class="btn btn-default" href="[% c.uri_for_action('/appointments/create') %]">
+  <span class="glyphicon glyphicon-plus"></span> Novo Agendamento</a>
+
+<br><br>
+
+[% FOREACH appointment IN appointments %]
+<a href="#" class="list-group-item">[% appointment.date_time.strftime('%Y-%m-%d %H:%M') %]
+  &mdash; [% appointment.patient.name %]
+  <span class="label
+               [% IF appointment.status    == 'Pendente'  %]label-danger
+               [% ELSIF appointment.status == 'Concluído' %]label-success[% END %]
+               pull-right">[% appointment.status %]</span>
+</a>
+[% END %]
+
+<!--
 <h2>02/04/2004</h2>
 
 <div class="list-group">
@@ -27,4 +43,4 @@
   <a href="#" class="list-group-item">17:00 &mdash; Borges Carvalho
     <span class="label label-danger pull-right">Pendente</span></a>
 </div>
-
+-->

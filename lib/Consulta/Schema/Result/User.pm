@@ -103,6 +103,7 @@ __PACKAGE__->add_columns(
   { data_type => "timestamp with time zone", is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("id");
+__PACKAGE__->add_unique_constraint("users_username_key", ["username"]);
 __PACKAGE__->belongs_to(
   "address_city",
   "Consulta::Schema::Result::City",
@@ -164,8 +165,8 @@ __PACKAGE__->has_many(
 __PACKAGE__->many_to_many("roles", "user_roles", "role");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07035 @ 2014-07-23 13:49:11
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ktj5Wl9AF+UX0rwNnWQL1w
+# Created by DBIx::Class::Schema::Loader v0.07035 @ 2014-07-24 11:28:44
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:hjsODevQ6a0gMer9ye4ZUg
 
 sub address {
     my $self = shift;

@@ -70,6 +70,7 @@ sub login :Path('/entrar') Args(0) {
 
 sub logout :Path('sair') Args(0) {
     my ( $self, $c ) = @_;
+
     $c->logout;
     $c->res->redirect('/entrar');
 }
