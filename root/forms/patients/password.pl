@@ -7,10 +7,21 @@ use utf8;
 
     elements => [
         {
+            type  => 'Hidden',
+            name  => 'id'
+        },
+
+        {
             type  => 'Text',
             name  => 'username',
             label => 'Login',
-            constraints => ['Required'],
+            constraints => [
+                'Required',
+                { type      => 'DBIC::Unique',
+                  resultset => 'User',
+                  message   => 'Login já em uso',
+                  id_field  => 'id' },
+            ],
             attrs => {
                 class => 'form-control',
             },
@@ -20,9 +31,26 @@ use utf8;
             type  => 'Password',
             name  => 'password',
             label => 'Senha',
+            constraints => [
+                'Required',
+                { type    => 'Equal',
+                  others  => 'password_confirmation',
+                  message => 'As senhas devem ser iguais' },
+            ],
+            attrs => {
+                class => 'form-control',
+                autocomplete => 'off',
+            },
+        },
+
+        {
+            type  => 'Password',
+            name  => 'password_confirmation',
+            label => 'Senha (novamente)',
             constraints => ['Required'],
             attrs => {
                 class => 'form-control',
+                autocomplete => 'off',
             },
         },
 

@@ -40,7 +40,9 @@ __PACKAGE__->config(
     enable_catalyst_header => 1, # Send X-Catalyst header
 
     encoding => 'UTF-8',
+
     default_model => 'DB',
+
     'Plugin::Authentication' => {
         default_realm => 'members',
         members => {

@@ -135,6 +135,7 @@ sub password :Chained('object') PathPart('senha') Args(0) {
 
     my $form = HTML::FormFu->new
       ({ load_config_file => 'root/forms/patients/password.pl' });
+    $form->stash->{schema} = $c->model('DB');
     $form->process($c->req->params);
 
     if ($form->submitted_and_valid) {
