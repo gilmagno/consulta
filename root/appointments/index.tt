@@ -1,42 +1,89 @@
+[% is_doctor = c.check_user_roles('Médico') %]
+
 <div class="page-header">
   <h1>Agenda</h1>
 </div>
 
-<a class="btn btn-default" href="[% c.uri_for_action('/appointments/create') %]">
-  <span class="glyphicon glyphicon-plus"></span> Novo Agendamento</a>
-
+<!--
 <a class="btn btn-default" href="[% c.uri_for_action('/appointments/index') %]">
   <span class="glyphicon glyphicon-calendar"></span> Mês Corrente</a>
+-->
 
-<br><br>
+<h2>Hoje [% date_now.dmy('/') %]</h2>
 
+[% IF appointments_today.size > 0 %]
+<div class="list-group">
+  [% FOREACH appointment IN appointments_today %]
+  <a href="[% c.uri_for_action('/patients/appointments/details', [appointment.patient.id, appointment.id]) %]"
+     class="list-group-item">
+    [% appointment.date_time.strftime('%H:%M') %]
+    &mdash;
+    [% appointment.patient.name %]
+
+    [% UNLESS is_doctor %]
+    &mdash;
+    [% appointment.doctor.name %]
+    [% END %]
+
+    <span class="label
+                 [% IF    appointment.status == 'Marcado'    %]label-default
+                 [% ELSIF appointment.status == 'Confirmado' %]label-primary
+                 [% ELSIF appointment.status == 'Concluído'  %]label-success
+                 [% ELSIF appointment.status == 'Inconcluso' %]label-danger[% END %]
+                 pull-right">[% appointment.status %]</span>
+  </a>
+  [% END %]
+</div>
+[% ELSE %]
+<i>Não há agendamentos para hoje.</i>
+[% END %]
+
+<a id="month"></a>
 <h2>
+  Mês [% month %]/[% year %]
   <a href="[% c.uri_for_action('/appointments/index', { f => year_month_before }) %]">←</a>
-  Mês: [% month %]/[% year %]
   <a href="[% c.uri_for_action('/appointments/index', { f => year_month_after  }) %]">→</a>
 </h2>
 
+<div>
+  Dias
+  [% FOREACH day IN days %]
+  <span><a href="#[% day.strftime('%d') %]">[% day.strftime('%d') %]</a></span>
+  [% END %]
+</div>
+
 [% FOREACH day IN days %]
 
-<h3>[% day.dmy('/') %] [% day.set_locale('pt_BR').day_name.ucfirst %]</h3>
+<a id="[% day.strftime('%d') %]"></a>
+<h3>
+  [% day.strftime('%d/%m/%y') %] [% day.set_locale('pt_BR').day_name %]
+  <small><a href="#">↑</a> <a href="/pacientes">buscar paciente</a></small>
+</h3>
 
 <div class="list-group">
   [% formatted_day = day.ymd('-') %]
 
   [% FOREACH appointment IN appointments.$formatted_day %]
-  <a href="[% c.uri_for_action('/appointments/details', [appointment.id]) %]" class="list-group-item">
+  <a href="[% c.uri_for_action('/patients/appointments/details',
+           [appointment.patient.id, appointment.id]) %]"
+     class="list-group-item">
     [% appointment.date_time.strftime('%H:%M') %]
     &mdash;
     [% appointment.patient.name %]
+
+    [% UNLESS is_doctor %]
     &mdash;
     [% appointment.doctor.name %]
+    [% END %]
 
     <span class="label
-                 [% IF appointment.status    == 'Pendente'  %]label-danger
-                 [% ELSIF appointment.status == 'Concluído' %]label-success[% END %]
+                 [% IF    appointment.status == 'Marcado'    %]label-default
+                 [% ELSIF appointment.status == 'Confirmado' %]label-primary
+                 [% ELSIF appointment.status == 'Concluído'  %]label-success
+                 [% ELSIF appointment.status == 'Inconcluso' %]label-danger[% END %]
                  pull-right">[% appointment.status %]</span>
   </a>
   [% END %]
 </div>
 
-[% END %]
+[% END # FOREACH days %]

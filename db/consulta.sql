@@ -229,10 +229,14 @@ insert into role_actions (role_id, action_id) values (5, 11); -- appointments_vi
 
 ----------------------------------------------------------------------
 
-insert into users (name, username) values ('Super Admin', 'superadmin');
+insert into users (name, username, password, rg, cpf, phone, email)
+values ('Super Admin', 'superadmin', 'senha', '', '',
+        '(85) 6234-6913', 'superadmin@gmail.com');
 insert into user_roles    (user_id, role_id)   values (1, 1);
 
-insert into users (name, username) values ('Admin', 'fortalclinic-admin');
+insert into users (name, username, password, rg, cpf, phone, email)
+values ('Fortalclinic Admin', 'admin', 'senha', '', '',
+        '(85) 4234-6913', 'admin@gmail.com');
 insert into clients_users (user_id, client_id) values (2, 1);
 insert into user_roles    (user_id, role_id)   values (2, 2);
 

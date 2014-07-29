@@ -124,8 +124,6 @@ sub delete :Chained('object') PathPart('deletar') Args(0) {
     my ($self, $c) = @_;
 
     $c->detach('/unauthorized') unless $c->check_user_ability('users_delete');
-
-    # TODO
 }
 
 sub password :Chained('object') PathPart('senha') Args(0) {
@@ -151,6 +149,7 @@ sub password :Chained('object') PathPart('senha') Args(0) {
 
     $c->stash(form => $form);
 }
+
 __PACKAGE__->meta->make_immutable;
 
 1;

@@ -23,10 +23,10 @@ sub auto :Private {
         return 0;
     }
 
-    #$c->log->debug( $c->uri_for_action('/patients/details', [3]) );
-    #$c->log->debug( 'Path: ' . $c->req->path );
-    #$c->log->debug( 'Action: ' . $c->req->action );
-    #$c->log->debug( 'Captures: ' . (Dumper $c->req->captures) );
+    # $c->log->debug( $c->uri_for_action('/patients/details', [3]) );
+    # $c->log->debug( 'Path: ' . $c->req->path );
+    # $c->log->debug( 'Action: ' . $c->req->action );
+    # $c->log->debug( 'Captures: ' . (Dumper $c->req->captures) );
 
     return 1;
 }
@@ -34,7 +34,12 @@ sub auto :Private {
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
-    $c->detach('/unauthorized') if $c->check_user_roles('Paciente');
+    if ($c->check_user_roles('Paciente')) {
+        $c->detach('/unauthorized');
+    }
+    else {
+        $c->res->redirect('/agenda');
+    }
 }
 
 sub unauthorized :Local Args(0) {

@@ -4,5 +4,9 @@ $.datepicker.setDefaults( $.datepicker.regional[ "pt-BR" ] );
 
 $(document).ready(function() {
     $('.datepicker').datepicker();
+    $('.datetimepicker').datetimepicker({
+        controlType: 'select',
+        stepMinute: 5,
+    });
 });
 </script>

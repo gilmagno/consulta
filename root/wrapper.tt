@@ -14,6 +14,7 @@
     <script src="[% c.uri_for('/static/js/bootstrap.min.js') %]"></script>
     <script src="[% c.uri_for('/static/js/jquery-ui.min.js') %]"></script>
     <script src="[% c.uri_for('/static/js/datepicker-pt-BR.js') %]"></script>
+    <script src="[% c.uri_for('/static/js/jquery-ui-timepicker-addon.js') %]"></script>
     <script src="[% c.uri_for('/static/js/Chart.js') %]"></script>
   </head>
 
@@ -34,14 +35,11 @@
           <ul class="nav navbar-nav">
             [% IF c.user_exists && !c.check_user_roles('Paciente') %]
 
-            <li [% IF c.req.action == '/' %]class="active"[% END %]>
-              <a href="/">Início</a></li>
+            <li [% IF c.req.action.match('^/appointments/.*') %]class="active"[% END %]>
+              <a href="/agenda">Agenda</a></li>
 
             <li [% IF c.req.action.match('/patients/.*') %]class="active"[% END %]>
               <a href="/pacientes">Pacientes</a></li>
-
-            <li [% IF c.req.action.match('/appointments/.*') %]class="active"[% END %]>
-              <a href="/agenda">Agenda</a></li>
 
             [% END %]
           </ul>

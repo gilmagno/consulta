@@ -7,7 +7,7 @@
 
 <br><br>
 
-
+[% IF consultations.size > 0 %]
 <div class="list-group">
   [% FOREACH consultation IN consultations %]
   <a href="[% c.uri_for_action('/patients/consultations/details', [user.id, consultation.id]) %]" class="list-group-item">
@@ -16,4 +16,6 @@
   </a>
   [% END %]
 </div>
-
+[% ELSE %]
+<i>Não há nenhuma consulta.</i>
+[% END %]

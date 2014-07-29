@@ -57,4 +57,25 @@ sub _get_users_from_role_paginated {
     return [$users_rs->all], $pager;
 }
 
+sub get_doctors {
+    my ($self) = @_;
+
+    my $where = { 'role.name' => 'Médico' };
+    my $attrs = { join     => { user_roles  =>  role  },
+                  order_by => { -asc        => 'me.name' }   };
+
+    my $users_rs = $self->search_rs($where, $attrs);
+
+    return $users_rs->all;
+}
+
+sub get_doctors_as_select_options {
+    my ($self) = @_;
+
+    my @doctors = $self->get_doctors;
+    my @doctors_options = map { [ $_->id, $_->name ] } @doctors;
+
+    return \@doctors_options;
+}
+
 1;
