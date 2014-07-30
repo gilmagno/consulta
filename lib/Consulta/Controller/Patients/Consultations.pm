@@ -72,6 +72,8 @@ sub create :Chained('base') PathPart('criar') Args(0) {
         ) );
     }
 
+    $form->default_values({ date => DateTime->now });
+
     $c->stash(form => $form);
 }
 

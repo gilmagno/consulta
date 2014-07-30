@@ -21,6 +21,32 @@ sub base :Chained('/') PathPart('agenda') CaptureArgs(0) {
 sub index :Chained('base') PathPart('') Args(0) {
     my ($self, $c) = @_;
 
+    my $path;
+
+    if ($c->check_user_roles('Médico')) {
+        $path = '/appointments/today';
+    }
+    else {
+        $path = '/appointments/month';
+    }
+
+    $c->res->redirect( $c->uri_for_action($path) );
+}
+
+sub today :Chained('base') PathPart('hoje') Args(0) {
+    my ($self, $c) = @_;
+
+    my $date_now = DateTime->now;
+
+    my @appointments_today = $c->stash->{appointments_rs}->appointments_today;
+
+    $c->stash(date_now           => $date_now,
+              appointments_today => \@appointments_today);
+}
+
+sub month :Chained('base') PathPart('mes') Args(0) {
+    my ($self, $c) = @_;
+
     my $date_now = DateTime->now;
 
     my $month;
@@ -71,10 +97,7 @@ sub index :Chained('base') PathPart('') Args(0) {
         push @{ $appointments{ $appointment_item->date_time->ymd('-') } }, $appointment_item;
     }
 
-    my @appointments_today = $c->stash->{appointments_rs}->appointments_today;
-
     $c->stash(date_now           => $date_now,
-              appointments_today => \@appointments_today,
 
               days               => \@days,
               month              => $month,
@@ -82,7 +105,8 @@ sub index :Chained('base') PathPart('') Args(0) {
               appointments       => \%appointments,
 
               year_month_before  => $date_start->subtract(months => 1)->strftime('%Y-%m'),
-              year_month_after   => $date_start->add     (months => 2)->strftime('%Y-%m')  );
+              year_month_after   => $date_start->add     (months => 2)->strftime('%Y-%m')
+    );
 }
 
 __PACKAGE__->meta->make_immutable;

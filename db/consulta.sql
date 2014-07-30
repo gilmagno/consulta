@@ -303,7 +303,7 @@ insert into user_roles    (user_id, role_id)   values (12, 5);
 ----------------------------------------------------------------------
 
 insert into consultations (register_id, patient_id, date, text) values
-(3, 5, '2003-02-01', 'Paciente solicitou checagem completa. Solicitei homograma. Auscutei e encontrei estado normal. Chequei pulmões, normal. Chequei pressão e temperatura, normal.
+(3, 5, '2003-02-01', 'Paciente solicitou exames para checagem completa de seu estado. Solicitei hemograma. Auscutei e encontrei estado normal. Chequei pulmões, normal. Chequei pressão e temperatura, normal.
 Falou que tem tido febre, mas agora está melhor. Não está sob nenhuma medicação no momento.');
 
 insert into consultations (register_id, patient_id, date, text) values
@@ -431,54 +431,37 @@ insert into appointments (register_id, doctor_id, patient_id, date_time,
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 5, '2014-07-04 09:30', null, 'Concluído', null, null);
 
 insert into appointments (register_id, doctor_id, patient_id, date_time,
                           text, status, created, updated) values
-(4, 3, 5, '2014-07-06 09:30', null, 'Concluído', null, null);
+(4, 3, 6, '2014-07-04 10:30', null, 'Concluído', null, null);
 
 insert into appointments (register_id, doctor_id, patient_id, date_time,
                           text, status, created, updated) values
-(4, 3, 6, '2014-07-06 10:30', null, 'Concluído', null, null);
+(4, 3, 7, '2014-07-04 11:30', null, 'Concluído', null, null);
 
 insert into appointments (register_id, doctor_id, patient_id, date_time,
                           text, status, created, updated) values
-(4, 3, 7, '2014-07-06 11:30', null, 'Concluído', null, null);
+(4, 3, 8, '2014-07-04 14:30', null, 'Concluído', null, null);
 
 insert into appointments (register_id, doctor_id, patient_id, date_time,
                           text, status, created, updated) values
-(4, 3, 8, '2014-07-06 14:30', null, 'Concluído', null, null);
+(4, 3, 9, '2014-07-04 15:30', null, 'Concluído', null, null);
 
 insert into appointments (register_id, doctor_id, patient_id, date_time,
                           text, status, created, updated) values
-(4, 3, 9, '2014-07-06 15:30', null, 'Concluído', null, null);
+(4, 3, 10, '2014-07-04 16:30', null, 'Concluído', null, null);
 
 insert into appointments (register_id, doctor_id, patient_id, date_time,
                           text, status, created, updated) values
-(4, 3, 10, '2014-07-06 16:30', null, 'Concluído', null, null);
+(4, 3, 11, '2014-07-04 17:30', null, 'Concluído', null, null);
 
 insert into appointments (register_id, doctor_id, patient_id, date_time,
                           text, status, created, updated) values
-(4, 3, 11, '2014-07-06 17:30', null, 'Concluído', null, null);
-
-insert into appointments (register_id, doctor_id, patient_id, date_time,
-                          text, status, created, updated) values
-(4, 3, 12, '2014-07-06 18:30', null, 'Concluído', null, null);
+(4, 3, 12, '2014-07-04 18:30', null, 'Concluído', null, null);
 
 
 
@@ -547,8 +530,6 @@ insert into appointments (register_id, doctor_id, patient_id, date_time,
 insert into appointments (register_id, doctor_id, patient_id, date_time,
                           text, status, created, updated) values
 (4, 3, 12, '2014-07-08 18:30', null, 'Concluído', null, null);
-
-
 
 
 
@@ -623,35 +604,35 @@ insert into appointments (register_id, doctor_id, patient_id, date_time,
 
 insert into appointments (register_id, doctor_id, patient_id, date_time,
                           text, status, created, updated) values
-(4, 3, 5, '2014-07-13 09:30', null, 'Concluído', null, null);
+(4, 3, 5, '2014-07-11 09:30', null, 'Concluído', null, null);
 
 insert into appointments (register_id, doctor_id, patient_id, date_time,
                           text, status, created, updated) values
-(4, 3, 6, '2014-07-13 10:30', null, 'Concluído', null, null);
+(4, 3, 6, '2014-07-11 10:30', null, 'Concluído', null, null);
 
 insert into appointments (register_id, doctor_id, patient_id, date_time,
                           text, status, created, updated) values
-(4, 3, 7, '2014-07-13 11:30', null, 'Concluído', null, null);
+(4, 3, 7, '2014-07-11 11:30', null, 'Concluído', null, null);
 
 insert into appointments (register_id, doctor_id, patient_id, date_time,
                           text, status, created, updated) values
-(4, 3, 8, '2014-07-13 14:30', null, 'Concluído', null, null);
+(4, 3, 8, '2014-07-11 14:30', null, 'Concluído', null, null);
 
 insert into appointments (register_id, doctor_id, patient_id, date_time,
                           text, status, created, updated) values
-(4, 3, 9, '2014-07-13 15:30', null, 'Concluído', null, null);
+(4, 3, 9, '2014-07-11 15:30', null, 'Concluído', null, null);
 
 insert into appointments (register_id, doctor_id, patient_id, date_time,
                           text, status, created, updated) values
-(4, 3, 10, '2014-07-13 16:30', null, 'Concluído', null, null);
+(4, 3, 10, '2014-07-11 16:30', null, 'Concluído', null, null);
 
 insert into appointments (register_id, doctor_id, patient_id, date_time,
                           text, status, created, updated) values
-(4, 3, 11, '2014-07-13 17:30', null, 'Concluído', null, null);
+(4, 3, 11, '2014-07-11 17:30', null, 'Concluído', null, null);
 
 insert into appointments (register_id, doctor_id, patient_id, date_time,
                           text, status, created, updated) values
-(4, 3, 12, '2014-07-13 18:30', null, 'Concluído', null, null);
+(4, 3, 12, '2014-07-11 18:30', null, 'Concluído', null, null);
 
 
 
@@ -722,5 +703,409 @@ insert into appointments (register_id, doctor_id, patient_id, date_time,
 insert into appointments (register_id, doctor_id, patient_id, date_time,
                           text, status, created, updated) values
 (4, 3, 12, '2014-07-15 18:30', null, 'Concluído', null, null);
+
+
+
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 5, '2014-07-16 09:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 6, '2014-07-16 10:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 7, '2014-07-16 11:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 8, '2014-07-16 14:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 9, '2014-07-16 15:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 10, '2014-07-16 16:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 11, '2014-07-16 17:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 12, '2014-07-16 18:30', null, 'Concluído', null, null);
+
+
+
+
+
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 5, '2014-07-17 09:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 6, '2014-07-17 10:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 7, '2014-07-17 11:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 8, '2014-07-17 14:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 9, '2014-07-17 15:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 10, '2014-07-17 16:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 11, '2014-07-17 17:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 12, '2014-07-17 18:30', null, 'Concluído', null, null);
+
+
+
+
+
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 5, '2014-07-18 09:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 6, '2014-07-18 10:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 7, '2014-07-18 11:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 8, '2014-07-18 14:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 9, '2014-07-18 15:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 10, '2014-07-18 16:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 11, '2014-07-18 17:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 12, '2014-07-18 18:30', null, 'Concluído', null, null);
+
+
+
+
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 5, '2014-07-21 09:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 6, '2014-07-21 10:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 7, '2014-07-21 11:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 8, '2014-07-21 14:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 9, '2014-07-21 15:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 10, '2014-07-21 16:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 11, '2014-07-21 17:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 12, '2014-07-21 18:30', null, 'Concluído', null, null);
+
+
+
+
+
+
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 5, '2014-07-22 09:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 6, '2014-07-22 10:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 7, '2014-07-22 11:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 8, '2014-07-22 14:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 9, '2014-07-22 15:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 10, '2014-07-22 16:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 11, '2014-07-22 17:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 12, '2014-07-22 18:30', null, 'Concluído', null, null);
+
+
+
+
+
+
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 5, '2014-07-23 09:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 6, '2014-07-23 10:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 7, '2014-07-23 11:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 8, '2014-07-23 14:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 9, '2014-07-23 15:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 10, '2014-07-23 16:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 11, '2014-07-23 17:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 12, '2014-07-23 18:30', null, 'Concluído', null, null);
+
+
+
+
+
+
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 5, '2014-07-24 09:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 6, '2014-07-24 10:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 7, '2014-07-24 11:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 8, '2014-07-24 14:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 9, '2014-07-24 15:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 10, '2014-07-24 16:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 11, '2014-07-24 17:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 12, '2014-07-24 18:30', null, 'Concluído', null, null);
+
+
+
+
+
+
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 5, '2014-07-28 09:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 6, '2014-07-28 10:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 7, '2014-07-28 11:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 8, '2014-07-28 14:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 9, '2014-07-28 15:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 10, '2014-07-28 16:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 11, '2014-07-28 17:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 12, '2014-07-28 18:30', null, 'Concluído', null, null);
+
+
+
+
+
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 5, '2014-07-29 09:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 6, '2014-07-29 10:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 7, '2014-07-29 11:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 8, '2014-07-29 14:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 9, '2014-07-29 15:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 10, '2014-07-29 16:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 11, '2014-07-29 17:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 12, '2014-07-29 18:30', null, 'Concluído', null, null);
+
+
+
+
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 5, '2014-07-25 09:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 6, '2014-07-25 10:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 7, '2014-07-25 11:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 8, '2014-07-25 14:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 9, '2014-07-25 15:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 10, '2014-07-25 16:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 11, '2014-07-25 17:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 12, '2014-07-25 18:30', null, 'Concluído', null, null);
+
+
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 5, '2014-07-30 09:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 6, '2014-07-30 10:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 7, '2014-07-30 11:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 8, '2014-07-30 14:30', null, 'Inconcluso', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 9, '2014-07-30 15:30', null, 'Concluído', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 10, '2014-07-30 16:30', null, 'Confirmado', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 11, '2014-07-30 17:30', null, 'Marcado', null, null);
+
+insert into appointments (register_id, doctor_id, patient_id, date_time,
+                          text, status, created, updated) values
+(4, 3, 12, '2014-07-30 18:30', null, 'Marcado', null, null);
 
 
