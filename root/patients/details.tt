@@ -17,22 +17,55 @@
 -->
 [% END %]
 
-[% IF c.check_user_roles('Médico') %]
-<a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/create', [user.id]) %]">
-  <span class="glyphicon glyphicon-plus"></span> Nova Consulta</a>
-[% END %]
 
-[% IF c.check_user_ability('appointments_create') %]
-<a class="btn btn-default" href="[% c.uri_for_action('/patients/appointments/create', [user.id]) %]">
-  <span class="glyphicon glyphicon-plus"></span> Novo Agendamento</a>
-[% END %]
 
-<a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/index', [user.id]) %]">
-  <span class="glyphicon glyphicon-th-list"></span> Consultas</a>
 
-<a class="btn btn-default"
-   href="[% c.uri_for_action('/patients/appointments/index', [user.id]) %]">
-  <span class="glyphicon glyphicon-th-list"></span> Agendamentos</a>
+<div style="margin-top: 3px">
+  <a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/index', [user.id]) %]">
+    <span class="glyphicon glyphicon-th-list"></span> Consultas</a>
+
+  <a class="btn btn-default"
+     href="[% c.uri_for_action('/patients/appointments/index', [user.id]) %]">
+    <span class="glyphicon glyphicon-th-list"></span> Agendamentos</a>
+
+
+  <a class="btn btn-default"
+     href="[% c.uri_for_action('/patients/appointments/index', [user.id]) %]">
+    <span class="glyphicon glyphicon-th-list"></span> Receituários Médicos</a>
+
+
+  <a class="btn btn-default"
+     href="[% c.uri_for_action('/patients/appointments/index', [user.id]) %]">
+    <span class="glyphicon glyphicon-th-list"></span> Receituários de Óculos</a>
+</div>
+
+
+
+
+
+<div style="margin-top: 3px">
+  [% IF c.check_user_roles('Médico') %]
+  <a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/create', [user.id]) %]">
+    <span class="glyphicon glyphicon-plus"></span> Consulta</a>
+  [% END %]
+
+  [% IF c.check_user_ability('appointments_create') %]
+  <a class="btn btn-default" href="[% c.uri_for_action('/patients/appointments/create', [user.id]) %]">
+    <span class="glyphicon glyphicon-plus"></span> Agendamento</a>
+  [% END %]
+
+
+  <a class="btn btn-default" href="#">
+    <span class="glyphicon glyphicon-plus"></span> Receituário Médico</a>
+
+  <a class="btn btn-default" href="#">
+    <span class="glyphicon glyphicon-plus"></span> Receituário de Óculos</a>
+</div>
+
+
+
+
+
 
 <h2>Dados Pessoais</h2>
 
