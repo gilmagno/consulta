@@ -9,4 +9,21 @@ application's directory and run
 
     cpanm --installdeps .
 
+Database:
+
+  1) Go to application root directory.
+
+  2) Access database server using any client. For example, psql.
+     psql -U postgres
+ 
+  3) In order to create and connect to the database, run
+     create database consulta; \c consulta
+
+  4) In order to replay the consulta.sql file, which holds database
+     schema and data, run
+     \i db/consulta.sql
+
 Then run script/consulta_server.pl to test the application.
+
+With you browser, access localhost:3000 . Use login 'carlosmoura' and
+password 'senha'.
