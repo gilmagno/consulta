@@ -1,1 +1,12 @@
-Run script/consulta_server.pl to test the application.
+Install perl from perlbrew.
+
+Install App::cpanminus . Run
+
+    cpan App::cpanminus
+
+To install the appliaction's dependencies, go the the
+application's directory and run
+
+    cpanm --installdeps .
+
+Then run script/consulta_server.pl to test the application.
