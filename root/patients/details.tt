@@ -10,31 +10,37 @@
 [% IF c.check_user_ability('users_edit') %]
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/edit', [user.id]) %]">
   <span class="glyphicon glyphicon-pencil"></span> Editar</a>
-
-<!--
-<a class="btn btn-default" href="[% c.uri_for_action('/patients/password', [user.id]) %]">
-  <span class="glyphicon glyphicon-lock"></span> Login e Senha</a>
--->
-[% END %]
-
-[% IF c.check_user_roles('Médico') %]
-<a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/create', [user.id]) %]">
-  <span class="glyphicon glyphicon-plus"></span> Nova Consulta</a>
 [% END %]
 
 [% IF c.check_user_ability('appointments_create') %]
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/appointments/create', [user.id]) %]">
-  <span class="glyphicon glyphicon-plus"></span> Novo Agendamento</a>
+  <span class="glyphicon glyphicon-plus"></span> Agendamento</a>
 [% END %]
 
-<a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/index', [user.id]) %]">
-  <span class="glyphicon glyphicon-th-list"></span> Consultas</a>
+[% IF c.check_user_roles('Médico') %]
+<a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/create', [user.id]) %]">
+  <span class="glyphicon glyphicon-plus"></span> Consulta</a>
 
-<a class="btn btn-default"
-   href="[% c.uri_for_action('/patients/appointments/index', [user.id]) %]">
-  <span class="glyphicon glyphicon-th-list"></span> Agendamentos</a>
+<a class="btn btn-default" href="[% c.uri_for_action('/patients/prescriptionsglasses/create', [user.id]) %]">
+  <span class="glyphicon glyphicon-plus"></span> Receit. Óculos</a>
+[% END %]
 
-<h2>Dados Pessoais</h2>
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    <span class="glyphicon glyphicon-th-list"></span>
+    Históricos <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="[% c.uri_for_action('/patients/appointments/index', [user.id]) %]">
+        <span class="glyphicon glyphicon-th-list"></span> Agendamentos</a></li>
+    <li><a href="[% c.uri_for_action('/patients/consultations/index', [user.id]) %]">
+        <span class="glyphicon glyphicon-th-list"></span> Consultas</a></li>
+    <li><a href="[% c.uri_for_action('/patients/prescriptionsglasses/index', [user.id]) %]">
+        <span class="glyphicon glyphicon-th-list"></span> Receituários de Óculos</a></li>
+  </ul>
+</div>
+
+<h2>Dados Cadastrais</h2>
 
 <dl class="dl-horizontal">
   <dt>RG</dt>
@@ -55,19 +61,20 @@
   <dd>[% user.username || 'Não informado' %]</dd>
 </dl>
 
-<h2>Consultas Recentes</h2>
+<h2>Consultas Recentes <small><a href="#">ver histórico</a></small></h2>
 
 <div class="list-group">
   [% FOREACH consultation IN consultations %]
-  <a href="[% c.uri_for_action('/patients/consultations/details', [user.id, consultation.id]) %]" class="list-group-item">
+  <a href="[% c.uri_for_action('/patients/consultations/details', [user.id, consultation.id]) %]"
+     class="list-group-item">
     <span class="badge pull-left">[% consultation.date.dmy('/') %]</span><br>
     [% consultation.text %]
   </a>
   [% END %]
 </div>
 
-<p>Ver <a href="[% c.uri_for_action('/patients/consultations/index', [user.id]) %]">
-    histórico completo</a>.</p>
+<h2>Receituários de Óculos Recentes <small><a href="#">ver histórico</a></small></h2>
+<i>Nenhum.</i>
 
 <h2>Dioptrias</h2>
 <center>

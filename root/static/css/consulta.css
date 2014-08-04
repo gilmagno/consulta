@@ -1,6 +1,8 @@
 @import url("//fonts.googleapis.com/css?family=Ubuntu");
 body { font-family: 'Ubuntu', 'sans-serif' }
 .page-header { margin-top: 0 }
+.form-group-indented { padding-left: 34px }
+
 
 /* css for timepicker */
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
@@ -14,3 +16,4 @@ body { font-family: 'Ubuntu', 'sans-serif' }
 .ui-timepicker-rtl dl { text-align: right; padding: 0 5px 0 0; }
 .ui-timepicker-rtl dl dt{ float: right; clear: right; }
 .ui-timepicker-rtl dl dd { margin: 0 45% 10px 10px; }
+/* /css for timepicker */

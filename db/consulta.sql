@@ -113,6 +113,31 @@ create table consultation_files (
        filename varchar
 );
 
+
+--------------------------------------------------------------------------------
+
+create table prescriptions_glasses (
+       id serial primary key,
+
+       doctor_id int references users,
+       patient_id int references users,
+       date date,
+
+       spherical_right int,
+       spherical_left int,
+       cilindrical_right int,
+       cilindrical_left int,
+       axis_right int,
+       axis_left int,
+       npd_right int,
+       npd_left int,
+       add int,
+
+       text text,
+       created timestamp with time zone,
+       updated timestamp with time zone
+);
+
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
