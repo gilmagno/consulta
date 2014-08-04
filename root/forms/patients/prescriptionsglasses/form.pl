@@ -32,9 +32,8 @@ use utf8;
             elements => [
                 {
                     type => 'Text',
-                    name => 'esferico_oe',
+                    name => 'spherical_left',
                     label => 'Esférico OE',
-                    constraints => ['Required'],
                     attrs => {
                         class => 'form-control',
                     },
@@ -45,7 +44,7 @@ use utf8;
 
                 {
                     type => 'Text',
-                    name => 'esferico_od',
+                    name => 'spherical_right',
                     label => 'Esférico OD',
                     attrs => {
                         class => 'form-control',
@@ -63,9 +62,8 @@ use utf8;
             elements => [
                 {
                     type => 'Text',
-                    name => 'esferico_oe',
+                    name => 'cilindrical_left',
                     label => 'Cilíndrico OE',
-                    constraints => ['Required'],
                     attrs => {
                         class => 'form-control',
                     },
@@ -76,7 +74,7 @@ use utf8;
 
                 {
                     type => 'Text',
-                    name => 'esferico_od',
+                    name => 'cilindrical_right',
                     label => 'Cilíndrico OD',
                     attrs => {
                         class => 'form-control',
@@ -94,9 +92,8 @@ use utf8;
             elements => [
                 {
                     type => 'Text',
-                    name => 'esferico_oe',
+                    name => 'axis_left',
                     label => 'Eixo OE',
-                    constraints => ['Required'],
                     attrs => {
                         class => 'form-control',
                     },
@@ -107,7 +104,7 @@ use utf8;
 
                 {
                     type => 'Text',
-                    name => 'esferico_od',
+                    name => 'axis_right',
                     label => 'Eixo OD',
                     attrs => {
                         class => 'form-control',
@@ -125,9 +122,8 @@ use utf8;
             elements => [
                 {
                     type => 'Text',
-                    name => 'esferico_oe',
+                    name => 'npd_left',
                     label => 'DNP OE',
-                    constraints => ['Required'],
                     attrs => {
                         class => 'form-control',
                     },
@@ -138,7 +134,7 @@ use utf8;
 
                 {
                     type => 'Text',
-                    name => 'esferico_od',
+                    name => 'npd_right',
                     label => 'DNP OD',
                     attrs => {
                         class => 'form-control',
@@ -152,7 +148,7 @@ use utf8;
 
         {
             type        => 'Text',
-            name        => 'adicao',
+            name        => 'add',
             label       => 'Adição',
             attrs       => {
                 class => 'form-control',
@@ -163,7 +159,6 @@ use utf8;
             type        => 'Textarea',
             name        => 'text',
             label       => 'Anotações',
-            constraints => ['Required'],
             attrs       => {
                 class => 'form-control',
                 rows  => 9

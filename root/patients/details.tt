@@ -61,8 +61,11 @@
   <dd>[% user.username || 'Não informado' %]</dd>
 </dl>
 
-<h2>Consultas Recentes <small><a href="#">ver histórico</a></small></h2>
+<h2>Consultas Recentes
+  <small><a href="[% c.uri_for_action('/patients/consultations/index', [user.id]) %]">
+      ver histórico</a></small></h2>
 
+[% IF consultations.size > 0 %]
 <div class="list-group">
   [% FOREACH consultation IN consultations %]
   <a href="[% c.uri_for_action('/patients/consultations/details', [user.id, consultation.id]) %]"
@@ -72,9 +75,50 @@
   </a>
   [% END %]
 </div>
+[% ELSE %]
+<i>Nenhuma consulta.</i>
+[% END %]
 
-<h2>Receituários de Óculos Recentes <small><a href="#">ver histórico</a></small></h2>
-<i>Nenhum.</i>
+<h2>Receituários Recentes de Óculos
+  <small><a href="[% c.uri_for_action('/patients/prescriptionsglasses/index', [user.id]) %]">
+      ver histórico</a></small></h2>
+
+[% IF prescriptions_glasses.size > 0 %]
+<div class="list-group">
+  [% FOREACH prescription IN prescriptions_glasses %]
+  <a href="[% c.uri_for_action('/patients/prescriptionsglasses/details', [user.id, prescription.id]) %]"
+     class="list-group-item">
+    <span class="badge pull-left">[% prescription.date.dmy('/') %]</span><br>
+
+    [% IF prescription.spherical_left || prescription.spherical_right %]
+    Esférico: [% prescription.spherical_left || 'Não informado' %] / [% prescription.spherical_right || 'Não informado' %]<br>
+    [% END %]
+
+    [% IF prescription.cilindrical_left || prescription.cilindrical_right %]
+    Cilíndrico: [% prescription.cilindrical_left || 'Não informado' %] / [% prescription.cilindrical_right || 'Não informado' %]<br>
+    [% END %]
+
+    [% IF prescription.axis_left || prescription.axis_right %]
+    Eixo: [% prescription.axis_left || 'Não informado' %] / [% prescription.axis_right || 'Não informado' %]<br>
+    [% END %]
+
+    [% IF prescription.npd_left || prescription.npd_right %]
+    DNP: [% prescription.npd_left || 'Não informado' %] / [% prescription.npd_right || 'Não informado' %]<br>
+    [% END %]
+
+    [% IF prescription.add %]
+    Adição: [% prescription.add %]<br>
+    [% END %]
+
+    [% IF prescription.text %]
+    Anotações: [% prescription.text %]
+    [% END %]
+  </a>
+  [% END %]
+</div>
+[% ELSE %]
+<i>Nenhum receituário de óculos.</i>
+[% END %]
 
 <h2>Dioptrias</h2>
 <center>

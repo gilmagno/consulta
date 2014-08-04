@@ -64,15 +64,22 @@ sub index :Chained('base') PathPart('') Args(0) {
 sub details :Chained('object') PathPart('') Args(0) {
     my ($self, $c) = @_;
 
-    $c->stash(
-        consultations => [
-            $c->stash->{user}->consultations_patients(
-                undef,
-                { rows     => 5,
-                  order_by => { -desc => 'date' } }
-            )
-        ]
+    my @consultations = $c->stash->{user}->consultations_patients(
+        undef,
+        { rows     => 5,
+          order_by => [ { -desc => 'date' },
+                        { -desc => 'id'   } ] }
     );
+
+    my @prescriptions_glasses = $c->stash->{user}->prescriptions_glasses_patients(
+        undef,
+        { rows     => 5,
+          order_by => [ { -desc => 'date' },
+                        { -desc => 'id'   } ] }
+    );
+
+    $c->stash(consultations         => \@consultations,
+              prescriptions_glasses => \@prescriptions_glasses);
 }
 
 sub create :Chained('base') PathPart('criar') Args(0) {
