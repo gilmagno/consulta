@@ -1,51 +1,47 @@
 
 * Análise
-:LOGBOOK:
-CLOCK: [2014-07-16 Wed 15:25]--[2014-07-16 Wed 16:50] =>  1:25
-CLOCK: [2014-07-16 Wed 12:05]--[2014-07-16 Wed 13:20] =>  1:15
-CLOCK: [2014-07-10 Thu 14:25]--[2014-07-10 Thu 15:14] =>  0:49
-CLOCK: [2014-06-23 Mon 15:40]--[2014-06-23 Mon 16:19] =>  0:39
-:END:
-:PROPERTIES:
-:Effort:   32:00
-:END:
+** Recursos
+*** v 0.1
+**** CRUD de pacientes
+**** CRUD de agendamentos de consultas
+**** CRUD de consultas
+**** CRUD de receituários de medicamentos
+**** CRUD de receituários de óculos
+*** v 0.2
+**** Impressão de receituários de medicamentos
+**** Impressão de receituários de óculos
+*** v 0.3
+**** Venda e controle de produtos
+**** Relatórios
+*** v 0.4
+**** Avisos aos pacientes por email e SMS, sobre seus agendamentos etc
+**** Disponibilizar online para pacientes alguns de seus dados médicos
+*** v 0.5
+**** Cobrança, boletos, recibos, do médico para o paciente
+**** Servidor local que fala com servidor remoto
 
+** Uso
+Um user super_admin cria um client e cria um user client_admin para este client. Este client_admin cria users, mas só para o client ao qual está vinculado.
+
+Os users doctor e secretary, criados pelo client_admin, logam e usam o sistema.
+
+Users secretary cadastram patients e marcam appointments.
+
+Users doctor fazem o que o secretary faz, e também criam consultations, prescriptions_medicines (receituários de medicamentos) e prescriptions_glasses (receituários de óculos).
+
+Users doctor imprimem receituários. ¿Users secretary também?
+
+Users secretary fazem vendas de produtos.
+
+** Modularidade
 Sistema modular. Como trabalhar com Catalyst de forma modularizada?
 Exemplo: cadastro de pacientes é único, mas dependendo dos módulos
 instalados um paciente pode ganhar mais "campos" na interface.
 
-Usuário logado só tem acesso a dados do cliente ("clínica") a qual está
-ligado. Como fazer? Descrever aqui antes de começar a implementar.
-
-** Recursos (superficialmente)
-- Cadastro de pacientes
-
-- Agendamento de consultas
-
-- Avisos ao paciente por email e SMS, sobre seus agendamentos e outros
-
-- Insercao de consulta no perfil de um paciente
-
-- Disponibilizacao, para o paciente, de seu historico medico na Internet
-
-- Venda e controle de produtos (?)
-
-- Cobrança, boletos, recibos (agora nao)
-
-- Servidor local que fala com servidor remoto (agora nao)
-
-** Uso
-O super_admin cria um client e cria um admin para este
-client. O admin cria users, mas só para o client em que
-está.
-
-Os usuários doctor e secretary, criados pelo admin, logam e usam o
-sistema.
-
-Usuários secretary cadastram usuários patient e marcam appointments.
-
-Usuários doctor fazem o que secretary faz e também criam
-consultations e arquivos a uma consultation.
+** Arquitetura multi-cliente
+Usuário logado só tem acesso a dados do cliente ("clínica") a qual
+está vinculado. Como fazer? Descrever aqui antes de começar a
+implementar.
 
 ** Secretary procura patient
 *** Implementação "versão simples"
@@ -99,26 +95,10 @@ Encontra 2
   normalmente, o patient terá que fornecer sua senha. Essa senha o
   patient vai ter recebido quando fez seu cadastro pela primeira vez.
 
-** doctors vêem patients de outros clients? Se sim, como?
-Dúvida: client1 (clínica1) tem user1 (médico) e user2
-(paciente). ¿Pode acontecer de no client2 (clínica2) o user4 (médico)
-estar consultando o mesmo user2 (paciente) e queira ver seu histórico
-médico produzido no client1? Acho que sim. Relevância? Como resolver?
+** Doctors vêem patients de outros clients?
+Nas versões iniciais, não vai haver nenhuma "funcionalidade de rede social". No entanto, o banco de dados deve ser modelado considerando que essas funcionalidades serão feitas.
 
-** Navegacao
-Similar ao ACS.
-
-** Como fazer as telas de CRUD de consulta?
-Usuário logado no sistema vê lista de pacientes. Na tela de lista ele
-vê botão de cadastrar novo paciente. Procura um paciente. Clica.
-Entra no contexto do paciente. Menu superior tem itens como
-"histórico, consultas, vendas/produtos" outros. Menu superior fica
-fácil fazer interface resposiva, podemos dizer para os clientes que
-eles podem acessar de celular.
-
-Consultório: paciente chega e talvez secretary já cadstrou. Se não,
-médico pode cadastrar.  Quando cadastrado, médico entra no contexto do
-paciente. Lá terá botão "nova consulta".
+Dúvida: client1 (clínica1) tem user1 (médico) e user2 (paciente). ¿Pode acontecer de no client2 (clínica2) o user4 (médico) estar consultando o mesmo user2 (paciente) e queira ver seu histórico médico produzido no client1? Acho que sim. Relevância? Como resolver?
 
 ** Agendamento de consultas
 
@@ -160,15 +140,6 @@ Agenda                                               [+ Nova marcação]
 16:00
 ----------------------------------------------------------------------
 
-** ?
-Lembrar que Carlin falou de um tipo almoxarifado (com funcionalidade
-de vendas e trocas) integrado ao sistema.
-** Nomes
-*** Consulta
-Facil de falar
-*** MedData
-Nao tem ingles
-
 ** Permissões: procura de usuário
 Médico vê na procura pacientes que são seus 'amigos'.
 
@@ -177,13 +148,8 @@ Médico pode ver detalhes de pacientes que estão numa clínica que o médico.
 
 ** Permissões: consultas de usuário
 
-** Atalho agendamento
-Num agendamento vai ter um botão "Consultar". Será só um atalho para
-ir para /consulta/novo com os dados do usuário lá.
-
 * Administrativo
 ** Pesquisa outros softwares
-CLOCK: [2014-07-10 Thu 14:25]--[2014-07-10 Thu 14:46] =>  0:21
 
 *** http://www.doctormax.com.br/
 Desktop
@@ -220,21 +186,16 @@ http://www.telelistas.net/ce/fortaleza/clinicas+medicas
 http://www.guiamais.com.br/busca/clinicas+medicas-fortaleza-ce
 200 clínicas
 
+** Nomes para o sistema
+*** Consulta
+Facil de falar
+*** MedData
+Nao tem ingles
+*** OrgMed
+
 * Software
-CLOCK: [2014-07-21 Mon 14:40]--[2014-07-21 Mon 14:54] =>  0:14
-CLOCK: [2014-07-18 Fri 21:25]--[2014-07-19 Sat 01:15] =>  3:50
-CLOCK: [2014-07-12 Sat 09:30]--[2014-07-12 Sat 09:45] =>  0:15
 ** Base
 ** Navegacao
-/
-/entrar
-/sair
-
-/pacientes # Lista de pacientes
-/pacientes/2 # Detalhes de um paciente
-/pacientes/2/
-
-/adm/clientes (depois fazer isso)
 ** Banco
 ** Autenticacao
 ** Autorizacao
