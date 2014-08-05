@@ -1,14 +1,14 @@
-package Consulta::Controller::Patients::PrescriptionsGlasses;
+package Consulta::Controller::Patients::PrescriptionsMedicines;
 use Moose;
 use namespace::autoclean;
 use utf8;
 
 BEGIN { extends 'Catalyst::Controller' }
 
-sub base :Chained('/patients/object') PathPart('receituarios-oculos') CaptureArgs(0) {
+sub base :Chained('/patients/object') PathPart('receituarios-medicamentos') CaptureArgs(0) {
     my ($self, $c) = @_;
 
-    $c->stash(prescriptions_rs => $c->model('DB::PrescriptionsGlass'));
+    $c->stash(prescriptions_rs => $c->model('DB::PrescriptionsMedicine'));
 }
 
 sub object :Chained('base') PathPart('') CaptureArgs(1) {
@@ -22,7 +22,7 @@ sub object :Chained('base') PathPart('') CaptureArgs(1) {
     if ($@ or !$prescription) {
         $c->flash->{error_msg} = 'Não foi possível acessar o receituário solicitado.';
         $c->res->redirect(
-            $c->uri_for_action( '/patients/prescriptionsglasses/index', [$c->stash->{user}->id] )
+            $c->uri_for_action( '/patients/prescriptionsmedicines/index', [$c->stash->{user}->id] )
         );
         $c->detach('index');
     }
@@ -35,7 +35,7 @@ sub object :Chained('base') PathPart('') CaptureArgs(1) {
 sub index :Chained('base') PathPart('') Args(0) {
     my ($self, $c) = @_;
 
-    my @prescriptions = $c->stash->{user}->prescriptions_glasses_patients
+    my @prescriptions = $c->stash->{user}->prescriptions_medicines_patients
       (undef, { order_by => [ { -desc => 'date' }, { -desc => 'id' } ] });
 
     $c->stash(prescriptions => \@prescriptions);
@@ -52,7 +52,10 @@ sub create :Chained('base') PathPart('criar') Args(0) {
 
     #$c->detach('/unauthorized') unless $c->check_user_ability('consultations_create');
 
-    my $form = HTML::FormFu->new({ load_config_file => 'root/forms/patients/prescriptionsglasses/form.pl' });
+    my $form = HTML::FormFu->new({ load_config_file => 'root/forms/patients/prescriptionsmedicines/form.pl' });
+
+    $form->get_element({ name => 'medicine_id' })->options
+      ($c->model('DB::Medicine')->get_medicines_as_select_options);
     $form->process($c->req->params);
 
     if ($form->submitted_and_valid) {
@@ -64,9 +67,9 @@ sub create :Chained('base') PathPart('criar') Args(0) {
         $prescription->patient_id($c->stash->{user}->id);
         $prescription->update;
 
-        $c->flash->{success_msg} = 'Receituário de Óculos criado.';
+        $c->flash->{success_msg} = 'Receituário de Medicamento criado.';
         $c->res->redirect( $c->uri_for_action(
-            '/patients/prescriptionsglasses/details', [$c->stash->{user}->id, $prescription->id]
+            '/patients/prescriptionsmedicines/details', [$c->stash->{user}->id, $prescription->id]
         ) );
     }
 
@@ -78,16 +81,18 @@ sub create :Chained('base') PathPart('criar') Args(0) {
 sub edit :Chained('object') PathPart('editar') Args(0) {
     my ($self, $c) = @_;
 
-    my $form = HTML::FormFu->new({ load_config_file => 'root/forms/patients/prescriptionsglasses/form.pl' });
+    my $form = HTML::FormFu->new({ load_config_file => 'root/forms/patients/prescriptionsmedicines/form.pl' });
+    $form->get_element({ name => 'medicine_id' })->options
+      ($c->model('DB::Medicine')->get_medicines_as_select_options);
     $form->process($c->req->params);
 
     if ($form->submitted_and_valid) {
         my $prescription = $c->stash->{prescription};
         $form->model->update( $prescription );
 
-        $c->flash->{success_msg} = 'Receituário de Óculos editado.';
+        $c->flash->{success_msg} = 'Receituário de Medicamento editado.';
         $c->res->redirect( $c->uri_for_action(
-            '/patients/prescriptionsglasses/details', [$c->stash->{user}->id, $prescription->id]
+            '/patients/prescriptionsmedicines/details', [$c->stash->{user}->id, $prescription->id]
         ) );
     }
     else {
@@ -95,6 +100,12 @@ sub edit :Chained('object') PathPart('editar') Args(0) {
     }
 
     $c->stash(form => $form);
+}
+
+sub _populate_form_medicines {
+    my ($self, $c, $form) = @_;
+
+
 }
 
 __PACKAGE__->meta->make_immutable;

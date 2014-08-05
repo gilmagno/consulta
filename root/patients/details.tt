@@ -21,6 +21,9 @@
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/create', [user.id]) %]">
   <span class="glyphicon glyphicon-plus"></span> Consulta</a>
 
+<a class="btn btn-default" href="[% c.uri_for_action('/patients/prescriptionsmedicines/create', [user.id]) %]">
+  <span class="glyphicon glyphicon-plus"></span> Receit. Medicamento</a>
+
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/prescriptionsglasses/create', [user.id]) %]">
   <span class="glyphicon glyphicon-plus"></span> Receit. Óculos</a>
 [% END %]
@@ -35,6 +38,8 @@
         <span class="glyphicon glyphicon-th-list"></span> Agendamentos</a></li>
     <li><a href="[% c.uri_for_action('/patients/consultations/index', [user.id]) %]">
         <span class="glyphicon glyphicon-th-list"></span> Consultas</a></li>
+    <li><a href="[% c.uri_for_action('/patients/prescriptionsmedicines/index', [user.id]) %]">
+        <span class="glyphicon glyphicon-th-list"></span> Receituários de Medicamentos</a></li>
     <li><a href="[% c.uri_for_action('/patients/prescriptionsglasses/index', [user.id]) %]">
         <span class="glyphicon glyphicon-th-list"></span> Receituários de Óculos</a></li>
   </ul>
@@ -61,9 +66,37 @@
   <dd>[% user.username || 'Não informado' %]</dd>
 </dl>
 
+<h2>Agendamentos Recentes
+  <small><a href="[% c.uri_for_action('/patients/appointments/index', [user.id]) %]">
+      histórico</a></small></h2>
+
+[% IF appointments.size > 0 %]
+<div class="list-group">
+  [% FOREACH appointment IN appointments %]
+  <a href="[% c.uri_for_action('/patients/appointments/details', [user.id, appointment.id]) %]"
+     class="list-group-item">
+    <span class="label
+                 [% IF    appointment.status == 'Marcado'    %]label-default
+                 [% ELSIF appointment.status == 'Confirmado' %]label-primary
+                 [% ELSIF appointment.status == 'Concluído'  %]label-success
+                 [% ELSIF appointment.status == 'Inconcluso' %]label-danger[% END %]
+                 pull-right">[% appointment.status %]</span>
+
+    <span class="badge pull-left">[% appointment.date_time.strftime('%d/%m/%Y %H:%M') %]</span><br>
+
+    Médico: [% appointment.doctor.name %].
+
+    [% appointment.text %]
+  </a>
+  [% END %]
+</div>
+[% ELSE %]
+<i>Nenhum agendamento.</i>
+[% END %]
+
 <h2>Consultas Recentes
   <small><a href="[% c.uri_for_action('/patients/consultations/index', [user.id]) %]">
-      ver histórico</a></small></h2>
+      histórico</a></small></h2>
 
 [% IF consultations.size > 0 %]
 <div class="list-group">
@@ -79,9 +112,36 @@
 <i>Nenhuma consulta.</i>
 [% END %]
 
+<h2>Receituários Recentes de Medicamentos
+  <small><a href="[% c.uri_for_action('/patients/prescriptionsmedicines/index', [user.id]) %]">
+      histórico</a></small></h2>
+
+[% IF prescriptions_medicines.size > 0 %]
+<div class="list-group">
+  [% FOREACH prescription IN prescriptions_medicines %]
+  <a href="[% c.uri_for_action('/patients/prescriptionsmedicines/details', [user.id, prescription.id]) %]"
+     class="list-group-item">
+    <span class="badge pull-left">[% prescription.date.dmy('/') %]</span><br>
+
+    Médico: [% prescription.doctor.name || 'Não informado' %].
+    Modo de uso: [% prescription.use_method || 'Não informado' %].
+    Medicamento: [% prescription.medicine.name || 'Não informado' %].
+    Quantidade: [% prescription.quantity || 'Não informado' %].
+    Unidade: [% prescription.unity || 'Não informado' %].
+
+    [% IF prescription.text %]
+    Anotações: [% prescription.text %]
+    [% END %]
+  </a>
+  [% END %]
+</div>
+[% ELSE %]
+<i>Nenhum receituário de medicamento.</i>
+[% END %]
+
 <h2>Receituários Recentes de Óculos
   <small><a href="[% c.uri_for_action('/patients/prescriptionsglasses/index', [user.id]) %]">
-      ver histórico</a></small></h2>
+      histórico</a></small></h2>
 
 [% IF prescriptions_glasses.size > 0 %]
 <div class="list-group">
@@ -120,7 +180,7 @@
 <i>Nenhum receituário de óculos.</i>
 [% END %]
 
-<h2>Dioptrias</h2>
+<h2>Dioptrias <small>exemplo</small></h2>
 <center>
   <b>
     <span style="color: rgba(251,187,205,1)">Esquerdo</span><br>
@@ -160,7 +220,7 @@ var ctx = $("#myChartHipermetropia").get(0).getContext("2d");
 var myLineChart = new Chart(ctx).Line(data, options);
 </script>
 
-<h2>Colesterol</h2>
+<h2>Colesterol <small>exemplo</small></h2>
 <center>
   <b>
     <span style="color: rgba(200,200,200,1)">Colesterol Total</span><br>

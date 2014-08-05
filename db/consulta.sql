@@ -116,6 +116,28 @@ create table consultation_files (
 
 --------------------------------------------------------------------------------
 
+create table medicines (
+       id serial primary key,
+       name varchar -- exemplo: "Azitromicina 500mg comp"
+);
+
+create table prescriptions_medicines (
+       id serial primary key,
+
+       doctor_id int references users,
+       patient_id int references users,
+       date date,
+
+       use_method varchar, -- exemplo: uso tópico, uso oral etc.
+       medicine_id int references medicines,
+       quantity varchar, -- exemplo: 4
+       unity varchar, -- exemplo: comprimidos, gotas, caixas etc.
+       text text,
+
+       created timestamp with time zone,
+       updated timestamp with time zone
+);
+
 create table prescriptions_glasses (
        id serial primary key,
 
@@ -324,6 +346,18 @@ values ('Amanda Teixeira', 'amanda', '', '2340234234123123', '202.412.323-43',
         '(85) 9344-4249', 'amanda@gmail.com');
 insert into clients_users (user_id, client_id) values (12, 1);
 insert into user_roles    (user_id, role_id)   values (12, 5);
+
+----------------------------------------------------------------------
+
+insert into medicines (name) values ('Azitromicina 500mg comp');
+
+----------------------------------------------------------------------
+
+insert into prescriptions_medicines (doctor_id, patient_id, date, use_method, medicine_id, quantity, unity, text)
+values (3, 5, '2014-08-01', 'Uso oral', '1', '1', 'caixa', 'Um comprimido a cada 12 horas');
+
+insert into prescriptions_medicines (doctor_id, patient_id, date, use_method, medicine_id, quantity, unity, text)
+values (3, 5, '2014-03-07', 'Uso oral', '1', '1', 'caixa', 'Um comprimido a cada 24 horas');
 
 ----------------------------------------------------------------------
 

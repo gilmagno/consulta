@@ -169,6 +169,18 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 __PACKAGE__->has_many(
+  "prescriptions_medicines_doctors",
+  "Consulta::Schema::Result::PrescriptionsMedicine",
+  { "foreign.doctor_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+__PACKAGE__->has_many(
+  "prescriptions_medicines_patients",
+  "Consulta::Schema::Result::PrescriptionsMedicine",
+  { "foreign.patient_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+__PACKAGE__->has_many(
   "user_roles",
   "Consulta::Schema::Result::UserRole",
   { "foreign.user_id" => "self.id" },
@@ -177,8 +189,8 @@ __PACKAGE__->has_many(
 __PACKAGE__->many_to_many("roles", "user_roles", "role");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07035 @ 2014-08-04 11:50:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zHb5kBMTKKKwKmg/ZoDCIw
+# Created by DBIx::Class::Schema::Loader v0.07035 @ 2014-08-05 14:37:11
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/e9VxaqYFNgYuMFCjDnC0g
 
 sub address {
     my $self = shift;

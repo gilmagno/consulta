@@ -40,5 +40,5 @@
   [% END %]
 </div>
 [% ELSE %]
-<i>Não há nenhuma receita.</i>
+<i>Não há nenhum receituário.</i>
 [% END %]

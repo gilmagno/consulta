@@ -5,13 +5,56 @@
 **** CRUD de pacientes
 **** CRUD de agendamentos de consultas
 **** CRUD de consultas
-**** CRUD de receituários de medicamentos
 **** CRUD de receituários de óculos
+**** CRUD de receituários de medicamentos
 *** v 0.2
 **** Impressão de receituários de medicamentos
 **** Impressão de receituários de óculos
 *** v 0.3
 **** Venda e controle de produtos
+Falei com Carlin e Socorro em 4/8/14. Pela conversa, entendi que
+haverá uma tabela de produtos, uma tabela de entrada de produtos e uma
+tabela de saída de produtos.
+
+products     (id, name,             price,                            quantity, text, created, updated)
+products_in  (id, product_id, date, price, register_id, recipient_id, quantity, text, created, updated)
+products_out (id, product_id, date, price, register_id, recipient_id, quantity, text, created, updated)
+
+O products.quantity é a quantidade total de um produto no
+estoque.
+
+Quando um products_in é registrado, seu quantity é somando ao
+products.quantity. No caso do products_out, faz-se uma subtração.
+
+Estorno: há o cenário onde um paciente compra uma lente de contato,
+por exemplo, e depois a devolve. A devolução pode ser gerar 1)
+devolução do dinheiro, 2) troca por produto igual ao devolvido ou 3)
+troca por outro produto.
+
+***** Devolução
+Paciente fez compra de lente de contato. Atendente registrou um
+products_out com quantidade "1", já que apenas uma caixa de lentes foi
+comprada.
+
+Paciente volta à clínica para devolver a caixa de lentes.
+
+****** Devolução de dinheiro
+Atendente devolve dinheiro ao paciente e o products_out gerado tem que
+ser marcado de alguma forma para indicar a devolução.
+
+status do products_out:
+  concluído                                 # continua a diminuir estoque
+  produto devolvido e descartado            # continua a diminuir estoque
+  produto devolvido e retornado ao estoque  # aumenta estoque
+
+****** Troca por produto igual ao devolvido
+status do products_out:
+  produto trocado por produto igual         # continua a diminuir estoque
+
+****** Troca por outro produto
+Opção 1: faz-se o products_out original ter status "produto devolvido
+e retornado ao estoque" e se cria novo products_out (do produto novo).
+
 **** Relatórios
 *** v 0.4
 **** Avisos aos pacientes por email e SMS, sobre seus agendamentos etc
