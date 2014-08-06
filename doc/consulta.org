@@ -1,16 +1,16 @@
 
 * Análise
 ** Recursos
-*** v 0.1
+*** v0.1
 **** CRUD de pacientes
 **** CRUD de agendamentos de consultas
 **** CRUD de consultas
 **** CRUD de receituários de óculos
 **** CRUD de receituários de medicamentos
-*** v 0.2
+*** v0.2
 **** Impressão de receituários de medicamentos
 **** Impressão de receituários de óculos
-*** v 0.3
+*** v0.3
 **** Venda e controle de produtos
 Falei com Carlin e Socorro em 4/8/14. Pela conversa, entendi que
 haverá uma tabela de produtos, uma tabela de entrada de produtos e uma
@@ -56,10 +56,10 @@ Opção 1: faz-se o products_out original ter status "produto devolvido
 e retornado ao estoque" e se cria novo products_out (do produto novo).
 
 **** Relatórios
-*** v 0.4
+*** v0.4
 **** Avisos aos pacientes por email e SMS, sobre seus agendamentos etc
 **** Disponibilizar online para pacientes alguns de seus dados médicos
-*** v 0.5
+*** v0.5
 **** Cobrança, boletos, recibos, do médico para o paciente
 **** Servidor local que fala com servidor remoto
 
@@ -75,6 +75,38 @@ Users doctor fazem o que o secretary faz, e também criam consultations, prescri
 Users doctor imprimem receituários. ¿Users secretary também?
 
 Users secretary fazem vendas de produtos.
+
+** Mapa de endereços
+*** /entrar
+*** /sair
+*** /pacientes
+**** /criar
+**** /<id>
+***** /editar
+***** /deletar
+***** /agendamentos
+****** /criar
+****** /<id>
+******* /editar
+******* /deletar
+***** /consultas
+****** /criar
+****** /<id>
+******* /editar
+******* /deletar
+***** /receituarios-medicamentos
+****** /criar
+****** /<id>
+******* /editar
+******* /deletar
+***** /receituarios-oculos
+****** /criar
+****** /<id>
+******* /editar
+******* /deletar
+*** /agenda
+**** /hoje
+**** /mes
 
 ** Modularidade
 Sistema modular. Como trabalhar com Catalyst de forma modularizada?
@@ -237,16 +269,14 @@ Nao tem ingles
 *** OrgMed
 
 * Software
-** Base
-** Navegacao
-** Banco
-** Autenticacao
-** Autorizacao
-** Cadastro de cliente
-** Agendamento
-*** Web
-*** Avisos por email
-*** Avisos por SMS
-** Consulta
-** Design
-** [#C] Acesso do paciente a seus dados
+** DONE Base da aplicação
+** DONE Base da navegação
+** DONE Base do banco de dados
+** DONE Base da autenticação
+** DONE Base da autorização
+** DONE CRUD de pacientes
+** DONE CRUD de agendamentos de consultas
+** DONE CRUD de consultas
+** DONE CRUD de receituários de óculos
+** DONE CRUD de receituários de medicamentos
+

@@ -4,19 +4,22 @@
 
 <a class="btn btn-default"
    href="[% c.uri_for_action('/patients/appointments/index', [user.id]) %]">
-  <span class="glyphicon glyphicon-th-list"></span> Agendamentos deste Paciente</a>
-
-<a class="btn btn-default"
-   href="[% c.uri_for_action('/appointments/month', { f => appointment.date_time.strftime('%Y-%m') }) %]#[% appointment.date_time.strftime('%d') %]">
-  <span class="glyphicon glyphicon-calendar"></span> Agenda em [% appointment.date_time.strftime('%d/%m/%Y') %]</a>
+  <span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
 <a class="btn btn-default"
    href="[% c.uri_for_action('/patients/appointments/edit', [user.id, appointment.id]) %]">
   <span class="glyphicon glyphicon-pencil"></span> Editar</a>
 
+<a class="btn btn-default"
+   href="[% c.uri_for_action('/appointments/month', { f => appointment.date_time.strftime('%Y-%m') }) %]#[% appointment.date_time.strftime('%d') %]">
+  <span class="glyphicon glyphicon-calendar"></span> Agenda em [% appointment.date_time.strftime('%d/%m/%Y') %]</a>
+
 [% IF c.check_user_roles('Médico') %]
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/details', [user.id]) %]">
   <span class="glyphicon glyphicon-user"></span> Perfil do Paciente</a>
+
+<a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/create', [user.id]) %]">
+  <span class="glyphicon glyphicon-plus"></span> Consulta</a>
 [% END %]
 
 <h2>Dados</h2>

@@ -17,17 +17,34 @@
   <span class="glyphicon glyphicon-plus"></span> Agendamento</a>
 [% END %]
 
+<a class="btn btn-default" href="[% c.uri_for_action('/patients/appointments/index', [user.id]) %]">
+  <span class="glyphicon glyphicon-th-list"></span> Agendamentos</a>
+
 [% IF c.check_user_roles('Médico') %]
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/create', [user.id]) %]">
   <span class="glyphicon glyphicon-plus"></span> Consulta</a>
 
+<a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/index', [user.id]) %]">
+  <span class="glyphicon glyphicon-th-list"></span> Consultas</a>
+
+<div style="margin-top: 3px"></div>
+
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/prescriptionsmedicines/create', [user.id]) %]">
   <span class="glyphicon glyphicon-plus"></span> Receit. Medicamento</a>
+
+
+<a class="btn btn-default" href="[% c.uri_for_action('/patients/prescriptionsmedicines/index', [user.id]) %]">
+  <span class="glyphicon glyphicon-th-list"></span> Receit. Medicamentos</a>
+
 
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/prescriptionsglasses/create', [user.id]) %]">
   <span class="glyphicon glyphicon-plus"></span> Receit. Óculos</a>
 [% END %]
 
+<a class="btn btn-default" href="[% c.uri_for_action('/patients/prescriptionsglasses/index', [user.id]) %]">
+  <span class="glyphicon glyphicon-th-list"></span> Receit. Óculos</a>
+
+<!--
 <div class="btn-group">
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
     <span class="glyphicon glyphicon-th-list"></span>
@@ -44,6 +61,7 @@
         <span class="glyphicon glyphicon-th-list"></span> Receituários de Óculos</a></li>
   </ul>
 </div>
+-->
 
 <h2>Dados Cadastrais</h2>
 
@@ -66,6 +84,7 @@
   <dd>[% user.username || 'Não informado' %]</dd>
 </dl>
 
+<!--
 <h2>Agendamentos Recentes
   <small><a href="[% c.uri_for_action('/patients/appointments/index', [user.id]) %]">
       histórico</a></small></h2>
@@ -270,3 +289,4 @@ var options = { animation: false }
 var ctx = $("#myChart").get(0).getContext("2d");
 var myLineChart = new Chart(ctx).Line(data, options);
 </script>
+-->
