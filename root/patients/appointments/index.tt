@@ -6,6 +6,11 @@
    href="[% c.uri_for_action('/patients/details', [user.id]) %]">
   <span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
+[% IF c.check_user_ability('appointments_create') %]
+<a class="btn btn-default" href="[% c.uri_for_action('/patients/appointments/create', [user.id]) %]">
+  <span class="glyphicon glyphicon-plus"></span> Agendamento</a>
+[% END %]
+
 <br><br>
 
 <div class="list-group">

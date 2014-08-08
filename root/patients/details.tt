@@ -12,34 +12,15 @@
   <span class="glyphicon glyphicon-pencil"></span> Editar</a>
 [% END %]
 
-[% IF c.check_user_ability('appointments_create') %]
-<a class="btn btn-default" href="[% c.uri_for_action('/patients/appointments/create', [user.id]) %]">
-  <span class="glyphicon glyphicon-plus"></span> Agendamento</a>
-[% END %]
-
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/appointments/index', [user.id]) %]">
   <span class="glyphicon glyphicon-th-list"></span> Agendamentos</a>
-
-[% IF c.check_user_roles('Médico') %]
-<a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/create', [user.id]) %]">
-  <span class="glyphicon glyphicon-plus"></span> Consulta</a>
 
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/index', [user.id]) %]">
   <span class="glyphicon glyphicon-th-list"></span> Consultas</a>
 
-<div style="margin-top: 3px"></div>
-
-<a class="btn btn-default" href="[% c.uri_for_action('/patients/prescriptionsmedicines/create', [user.id]) %]">
-  <span class="glyphicon glyphicon-plus"></span> Receit. Medicamento</a>
-
-
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/prescriptionsmedicines/index', [user.id]) %]">
   <span class="glyphicon glyphicon-th-list"></span> Receit. Medicamentos</a>
 
-
-<a class="btn btn-default" href="[% c.uri_for_action('/patients/prescriptionsglasses/create', [user.id]) %]">
-  <span class="glyphicon glyphicon-plus"></span> Receit. Óculos</a>
-[% END %]
 
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/prescriptionsglasses/index', [user.id]) %]">
   <span class="glyphicon glyphicon-th-list"></span> Receit. Óculos</a>
