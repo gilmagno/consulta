@@ -21,7 +21,3 @@
   <dt>Anotações</dt>
   <dd><p>[% consultation.text.replace('\n', '</p><p>').replace('\r', '') || 'Não informado' %]</p></dd>
 </dl>
-
-<h2>Arquivos Anexos</h2>
-
-<i>Nenhum arquivo anexo.</i>

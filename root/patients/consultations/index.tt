@@ -8,7 +8,7 @@
   <span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/create', [user.id]) %]">
-  <span class="glyphicon glyphicon-plus"></span> Consulta</a>
+  <span class="glyphicon glyphicon-plus"></span> Nova Consulta</a>
 
 <br><br>
 

@@ -19,7 +19,7 @@
   <span class="glyphicon glyphicon-user"></span> Perfil do Paciente</a>
 
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/create', [user.id]) %]">
-  <span class="glyphicon glyphicon-plus"></span> Consulta</a>
+  <span class="glyphicon glyphicon-plus"></span> Nova Consulta</a>
 [% END %]
 
 <h2>Dados</h2>
