@@ -18,22 +18,19 @@ requires 'namespace::autoclean';
 requires 'Config::General'; # This should reflect the config file format you've chosen
                  # See Catalyst::Plugin::ConfigLoader for supported formats
 
-requires 'Catalyst::Plugin::StackTrace';
-requires 'Catalyst::View::TT';
-
-requires 'DBIx::Class';
-requires 'DBIx::Class::Schema::Loader';
 requires 'Catalyst::Model::DBIC::Schema';
-
-requires 'Catalyst::Plugin::Session';
-requires 'Catalyst::Plugin::Session::Store::FastMmap';
+requires 'Catalyst::View::TT';
+requires 'MooseX::NonMoose';
+requires 'DBIx::Class::TimeStamp';
+requires 'DBD::Pg';
 requires 'Catalyst::Plugin::Session::State::Cookie';
-
-requires 'HTML::FormFu';
-requires 'HTML::FormFu::Model::DBIC';
-
-requires 'Catalyst::Plugin::Authentication';
+requires 'Catalyst::Plugin::Session::Store::FastMmap';
 requires 'Catalyst::Plugin::Authorization::RoleAbilities';
+requires 'Catalyst::Plugin::StackTrace';
+requires 'Catalyst::Authentication::Store::DBIx::Class';
+requires 'HTML::FormFu';
+requires 'DateTime::Format::Pg';
+requires 'HTML::FormFu::Model::DBIC';
 
 test_requires 'Test::More' => '0.88';
 test_requires 'Test::WWW::Mechanize::Catalyst';

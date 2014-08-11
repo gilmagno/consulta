@@ -17,7 +17,6 @@
   <dt>Data</dt>
   <dd>[% prescription.date.dmy('/') || 'Não informado' %]</dd>
 
-
   <dt>Esférico</dt>
   <dd>[% prescription.spherical_left || 'Não informado' %] / [% prescription.spherical_right || 'Não informado' %]</dd>
 

@@ -1,5 +1,6 @@
 package Consulta::Schema::ResultSet::User;
 use base 'DBIx::Class::ResultSet';
+use utf8;
 
 =head1 METHODS
 
