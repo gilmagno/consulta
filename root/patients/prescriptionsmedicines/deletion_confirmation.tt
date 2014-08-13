@@ -2,17 +2,14 @@
   <h1>
     <a href="[% c.uri_for_action('/patients/details', [user.id]) %]">[% user.name %]</a> /
     <a href="[% c.uri_for_action('/patients/prescriptionsmedicines/index', [user.id]) %]">Receit. Medicamentos</a> /
-    [% prescription.date.dmy('/') %], [% prescription.medicine.name %]</h1>
+    <a href="[% c.uri_for_action('/patients/prescriptionsmedicines/details', [user.id, prescription.id]) %]">
+      [% prescription.date.dmy('/') %], [% prescription.medicine.name %]</a> /
+    Deleção
+  </h1>
 </div>
 
-<a class="btn btn-default" href="[% c.uri_for_action('/patients/prescriptionsmedicines/index', [user.id]) %]">
+<a class="btn btn-default" href="[% c.uri_for_action('/patients/prescriptionsmedicines/details', [user.id, prescription.id]) %]">
   <span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
-
-<a class="btn btn-default" href="[% c.uri_for_action('/patients/prescriptionsmedicines/edit', [user.id, prescription.id]) %]">
-  <span class="glyphicon glyphicon-pencil"></span> Editar</a>
-
-<a class="btn btn-default" href="[% c.uri_for_action('/patients/prescriptionsmedicines/deletion_confirmation', [user.id, prescription.id]) %]">
-  <span class="glyphicon glyphicon-remove"></span> Deletar</a>
 
 <h2>Dados</h2>
 
@@ -42,3 +39,7 @@
     </p>
   </dd>
 </dl>
+
+<form method="POST">
+  <input type="submit" value="Confirmar Deleção" class="btn btn-default">
+</form>

@@ -102,6 +102,24 @@ sub edit :Chained('object') PathPart('editar') Args(0) {
     $c->stash(form => $form);
 }
 
+sub delete :Chained('object') PathPart('deletar') Args(0) {
+    my ($self, $c) = @_;
+
+    $c->stash->{prescription}->delete;
+    $c->flash->{success_msg} = 'Receituário deletado.';
+    $c->res->redirect($c->uri_for_action(
+        '/patients/prescriptionsmedicines/index', [$c->stash->{user}->id]
+    ));
+}
+
+sub deletion_confirmation :Chained('object') PathPart('confirmacao-delecao') Args(0) {
+    my ($self, $c) = @_;
+
+    if ($c->req->method eq 'POST') {
+        $c->detach('delete');
+    }
+}
+
 sub _populate_form_medicines {
     my ($self, $c, $form) = @_;
 

@@ -74,7 +74,6 @@ use utf8;
             type        => 'Textarea',
             name        => 'text',
             label       => 'Anotações',
-            constraints => ['Required'],
             attrs       => {
                 class => 'form-control',
                 rows  => 9
