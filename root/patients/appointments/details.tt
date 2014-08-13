@@ -15,7 +15,7 @@
   <span class="glyphicon glyphicon-pencil"></span> Editar</a>
 
 <a class="btn btn-default"
-   href="[% c.uri_for_action('/patients/appointments/delete', [user.id, appointment.id]) %]">
+   href="[% c.uri_for_action('/patients/appointments/deletion_confirmation', [user.id, appointment.id]) %]">
   <span class="glyphicon glyphicon-remove"></span> Deletar</a>
 
 <a class="btn btn-default"

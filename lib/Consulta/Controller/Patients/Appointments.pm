@@ -123,9 +123,15 @@ sub delete :Chained('object') PathPart('deletar') Args(0) {
     my ($self, $c) = @_;
 
     $c->stash->{appointment}->delete;
-    $c->flash->{success_msg} = 'Agendamento deletado';
+    $c->flash->{success_msg} = 'Agendamento deletado.';
     $c->res->redirect
       ( $c->uri_for_action( '/patients/appointments/index', [$c->stash->{user}->id]) );
+}
+
+sub deletion_confirmation :Chained('object') PathPart('confirmacao-delecao') Args(0) {
+    my ($self, $c) = @_;
+
+    $c->detach('delete') if $c->req->method eq 'POST';
 }
 
 __PACKAGE__->meta->make_immutable;
