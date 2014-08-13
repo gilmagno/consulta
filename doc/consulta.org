@@ -278,12 +278,14 @@ Nao tem ingles
 *** TODO "Deletar" - inativar
 ** DONE CRUD de agendamentos de consultas
 *** DONE Deletar
+*** TODO Confirmacao de delecao
 ** DONE CRUD de consultas
 *** DONE Deletar
-** INPR CRUD de receituários de medicamentos
-*** TODO Deletar
+*** TODO Confirmacao de delecao
+** DONE CRUD de receituários de medicamentos
+*** DONE Deletar com confirmacao
 ** INPR CRUD de receituários de óculos
-*** TODO Deletar
+*** TODO Deletar com confirmacao
 ** TODO Venda e controle de produtos
 *** TODO Listar
 *** TODO Detalhes
