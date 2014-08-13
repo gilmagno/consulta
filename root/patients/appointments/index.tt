@@ -1,5 +1,8 @@
 <div class="page-header">
-  <h1>[% user.name %] » Agendamentos</h1>
+  <h1>
+    <a href="[% c.uri_for_action('/patients/details', [user.id]) %]">[% user.name %]</a> /
+    Agendamentos
+  </h1>
 </div>
 
 <a class="btn btn-default"
@@ -8,7 +11,7 @@
 
 [% IF c.check_user_ability('appointments_create') %]
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/appointments/create', [user.id]) %]">
-  <span class="glyphicon glyphicon-plus"></span> Agendamento</a>
+  <span class="glyphicon glyphicon-plus"></span> Novo Agendamento</a>
 [% END %]
 
 <br><br>
