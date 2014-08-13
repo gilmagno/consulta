@@ -13,6 +13,11 @@
   <span class="glyphicon glyphicon-pencil"></span> Editar</a>
 [% END %]
 
+[% IF c.check_user_ability('consultations_delete') %]
+<a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/delete', [user.id, consultation.id]) %]">
+  <span class="glyphicon glyphicon-remove"></span> Deletar</a>
+[% END %]
+
 <h2>Dados</h2>
 
 <dl class="dl-horizontal">

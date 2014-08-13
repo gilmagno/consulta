@@ -99,6 +99,16 @@ sub edit :Chained('object') PathPart('editar') Args(0) {
     $c->stash(form => $form);
 }
 
+sub delete :Chained('object') PathPart('deletar') Args(0) {
+    my ($self, $c) = @_;
+
+    $c->stash->{consultation}->delete;
+    $c->flash->{success_msg} = 'Consulta deletada com sucesso.';
+    $c->res->redirect(
+        $c->uri_for_action('/patients/consultations/index', [$c->stash->{user}->id])
+    );
+}
+
 __PACKAGE__->meta->make_immutable;
 
 1;

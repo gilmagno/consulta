@@ -274,9 +274,19 @@ Nao tem ingles
 ** DONE Base do banco de dados
 ** DONE Base da autenticação
 ** DONE Base da autorização
-** DONE CRUD de pacientes
+** INPR CRUD de pacientes
+*** TODO "Deletar" - inativar
 ** DONE CRUD de agendamentos de consultas
+*** DONE Deletar
 ** DONE CRUD de consultas
-** DONE CRUD de receituários de óculos
-** DONE CRUD de receituários de medicamentos
-
+*** DONE Deletar
+** INPR CRUD de receituários de medicamentos
+*** TODO Deletar
+** INPR CRUD de receituários de óculos
+*** TODO Deletar
+** TODO Venda e controle de produtos
+*** TODO Listar
+*** TODO Detalhes
+*** TODO Criar
+*** TODO Editar
+*** TODO Deletar
