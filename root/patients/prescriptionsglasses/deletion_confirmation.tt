@@ -2,18 +2,14 @@
   <h1>
     <a href="[% c.uri_for_action('/patients/details', [user.id]) %]">[% user.name %]</a> /
     <a href="[% c.uri_for_action('/patients/prescriptionsglasses/index', [user.id]) %]">Receit. Óculos</a> /
-    [% prescription.date.dmy('/') %]</h1>
+    <a href="[% c.uri_for_action('/patients/prescriptionsglasses/details', [user.id, prescription.id]) %]">
+      [% prescription.date.dmy('/') %]</a> /
+    Deleção
+  </h1>
 </div>
 
-<a class="btn btn-default" href="[% c.uri_for_action('/patients/prescriptionsglasses/index', [user.id]) %]">
+<a class="btn btn-default" href="[% c.uri_for_action('/patients/prescriptionsglasses/details', [user.id, prescription.id]) %]">
   <span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
-
-<a class="btn btn-default" href="[% c.uri_for_action('/patients/prescriptionsglasses/edit', [user.id, prescription.id]) %]">
-  <span class="glyphicon glyphicon-pencil"></span> Editar</a>
-
-<a class="btn btn-default"
-   href="[% c.uri_for_action('/patients/prescriptionsglasses/deletion_confirmation', [user.id, prescription.id]) %]">
-  <span class="glyphicon glyphicon-remove"></span> Deletar</a>
 
 <h2>Dados</h2>
 
@@ -39,3 +35,7 @@
   <dt>Anotações</dt>
   <dd><p>[% prescription.text.replace('\n', '</p><p>').replace('\r', '') || 'Não informado' %]</p></dd>
 </dl>
+
+<form method="POST">
+  <input type="submit" value="Confirmar Deleção" class="btn btn-default">
+</form>

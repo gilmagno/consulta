@@ -275,17 +275,40 @@ Nao tem ingles
 ** DONE Base da autenticação
 ** DONE Base da autorização
 ** INPR CRUD de pacientes
-*** TODO "Deletar" - inativar
-** DONE CRUD de agendamentos de consultas
+*** DONE Listar
+*** DONE Detalhes
+*** DONE Criar
+*** DONE Editar
+*** DONE Outros CRUDs
+*** TODO "Deletar" -> inativar
+** INPR CRUD de agendamentos de consultas
+*** DONE Listar
+*** DONE Detalhes
+*** DONE Criar
+*** DONE Editar
 *** DONE Deletar
 *** TODO Confirmacao de delecao
-** DONE CRUD de consultas
+** INPR CRUD de consultas
+*** DONE Listar
+*** DONE Detalhes
+*** DONE Criar
+*** DONE Editar
 *** DONE Deletar
 *** TODO Confirmacao de delecao
 ** DONE CRUD de receituários de medicamentos
-*** DONE Deletar com confirmacao
-** INPR CRUD de receituários de óculos
-*** TODO Deletar com confirmacao
+*** DONE Listar
+*** DONE Detalhes
+*** DONE Criar
+*** DONE Editar
+*** DONE Deletar
+*** DONE Confirmação da deleção
+** DONE CRUD de receituários de óculos
+*** DONE Listar
+*** DONE Detalhes
+*** DONE Criar
+*** DONE Editar
+*** DONE Deletar
+*** DONE Confirmação da deleção
 ** TODO Venda e controle de produtos
 *** TODO Listar
 *** TODO Detalhes

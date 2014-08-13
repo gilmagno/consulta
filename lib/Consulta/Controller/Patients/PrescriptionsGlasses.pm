@@ -99,6 +99,18 @@ sub edit :Chained('object') PathPart('editar') Args(0) {
 
 sub delete :Chained('object') PathPart('deletar') Args(0) {
     my ($self, $c) = @_;
+
+    $c->stash->{prescription}->delete;
+    $c->flash->{success_msg} = 'Receituário deletado.';
+    $c->res->redirect($c->uri_for_action(
+        '/patients/prescriptionsglasses/index', [$c->stash->{user}->id]
+    ));
+}
+
+sub deletion_confirmation :Chained('object') PathPart('confirmacao-delecao') Args(0) {
+    my ($self, $c) = @_;
+
+    $c->detach('delete') if $c->req->method eq 'POST';
 }
 
 __PACKAGE__->meta->make_immutable;
