@@ -19,9 +19,6 @@
   <span class="glyphicon glyphicon-pencil"></span> Editar</a>
 
 [% IF c.check_user_roles('Médico') %]
-<a class="btn btn-default" href="[% c.uri_for_action('/patients/details', [user.id]) %]">
-  <span class="glyphicon glyphicon-user"></span> Perfil do Paciente</a>
-
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/create', [user.id]) %]">
   <span class="glyphicon glyphicon-plus"></span> Nova Consulta</a>
 [% END %]
