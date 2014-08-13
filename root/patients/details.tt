@@ -61,8 +61,8 @@
   <dd>[% user.email || 'Não informado' %]</dd>
   <dt>Email Adicional</dt>
   <dd>[% user.email2 || 'Não informado' %]</dd>
-  <dt>Login</dt>
-  <dd>[% user.username || 'Não informado' %]</dd>
+  <!--<dt>Login</dt>
+  <dd>[% user.username || 'Não informado' %]</dd>-->
 </dl>
 
 <!--
