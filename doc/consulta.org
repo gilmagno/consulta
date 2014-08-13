@@ -281,20 +281,20 @@ Nao tem ingles
 *** DONE Editar
 *** DONE Outros CRUDs
 *** TODO "Deletar" -> inativar
-** INPR CRUD de agendamentos de consultas
+** DONE CRUD de agendamentos de consultas
 *** DONE Listar
 *** DONE Detalhes
 *** DONE Criar
 *** DONE Editar
 *** DONE Deletar
-*** TODO Confirmacao de delecao
-** INPR CRUD de consultas
+*** DONE Confirmacao de delecao
+** DONE CRUD de consultas
 *** DONE Listar
 *** DONE Detalhes
 *** DONE Criar
 *** DONE Editar
 *** DONE Deletar
-*** TODO Confirmacao de delecao
+*** DONE Confirmacao de deleção
 ** DONE CRUD de receituários de medicamentos
 *** DONE Listar
 *** DONE Detalhes
