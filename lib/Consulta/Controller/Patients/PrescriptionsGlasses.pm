@@ -97,6 +97,10 @@ sub edit :Chained('object') PathPart('editar') Args(0) {
     $c->stash(form => $form);
 }
 
+sub delete :Chained('object') PathPart('deletar') Args(0) {
+    my ($self, $c) = @_;
+}
+
 __PACKAGE__->meta->make_immutable;
 
 1;
