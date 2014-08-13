@@ -1,6 +1,7 @@
 package Consulta::Controller::Patients::Appointments;
 use Moose;
 use namespace::autoclean;
+use utf8;
 
 BEGIN { extends 'Catalyst::Controller' }
 
@@ -28,7 +29,10 @@ sub object :Chained('base') PathPart('') CaptureArgs(1) {
 
     if ($@ or !$appointment) {
         $c->flash->{error_msg} = 'Não foi possível acessar o agendamento solicitado.';
-        $c->res->redirect( $c->uri_for_action('/appointments') );
+
+        # TODO redirect e detach? :/ como fazer isso melhor (ou direito)?
+        $c->res->redirect
+          ( $c->uri_for_action('/patients/appointments/index', [$c->stash->{user}->id]) );
         $c->detach('index');
     }
 
@@ -115,7 +119,14 @@ sub edit :Chained('object') PathPart('editar') Args(0) {
     $c->stash(form => $form);
 }
 
-sub delete :Chained('object') PathPart('deletar') Args(0) {}
+sub delete :Chained('object') PathPart('deletar') Args(0) {
+    my ($self, $c) = @_;
+
+    $c->stash->{appointment}->delete;
+    $c->flash->{success_msg} = 'Agendamento deletado';
+    $c->res->redirect
+      ( $c->uri_for_action( '/patients/appointments/index', [$c->stash->{user}->id]) );
+}
 
 __PACKAGE__->meta->make_immutable;
 

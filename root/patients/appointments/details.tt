@@ -18,6 +18,10 @@
    href="[% c.uri_for_action('/patients/appointments/edit', [user.id, appointment.id]) %]">
   <span class="glyphicon glyphicon-pencil"></span> Editar</a>
 
+<a class="btn btn-default"
+   href="[% c.uri_for_action('/patients/appointments/delete', [user.id, appointment.id]) %]">
+  <span class="glyphicon glyphicon-remove"></span> Deletar</a>
+
 [% IF c.check_user_roles('Médico') %]
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/create', [user.id]) %]">
   <span class="glyphicon glyphicon-plus"></span> Nova Consulta</a>
