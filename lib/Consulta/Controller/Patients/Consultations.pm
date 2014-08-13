@@ -103,7 +103,7 @@ sub delete :Chained('object') PathPart('deletar') Args(0) {
     my ($self, $c) = @_;
 
     $c->stash->{consultation}->delete;
-    $c->flash->{success_msg} = 'Consulta deletada com sucesso.';
+    $c->flash->{success_msg} = 'Consulta deletada.';
     $c->res->redirect(
         $c->uri_for_action('/patients/consultations/index', [$c->stash->{user}->id])
     );
