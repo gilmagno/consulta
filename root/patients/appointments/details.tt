@@ -11,16 +11,16 @@
   <span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
 <a class="btn btn-default"
-   href="[% c.uri_for_action('/appointments/month', { f => appointment.date_time.strftime('%Y-%m') }) %]#[% appointment.date_time.strftime('%d') %]">
-  <span class="glyphicon glyphicon-calendar"></span> Agenda em [% appointment.date_time.strftime('%d/%m/%Y') %]</a>
-
-<a class="btn btn-default"
    href="[% c.uri_for_action('/patients/appointments/edit', [user.id, appointment.id]) %]">
   <span class="glyphicon glyphicon-pencil"></span> Editar</a>
 
 <a class="btn btn-default"
    href="[% c.uri_for_action('/patients/appointments/delete', [user.id, appointment.id]) %]">
   <span class="glyphicon glyphicon-remove"></span> Deletar</a>
+
+<a class="btn btn-default"
+   href="[% c.uri_for_action('/appointments/month', { f => appointment.date_time.strftime('%Y-%m') }) %]#[% appointment.date_time.strftime('%d') %]">
+  <span class="glyphicon glyphicon-calendar"></span> Agenda em [% appointment.date_time.strftime('%d/%m/%Y') %]</a>
 
 [% IF c.check_user_roles('Médico') %]
 <a class="btn btn-default" href="[% c.uri_for_action('/patients/consultations/create', [user.id]) %]">
